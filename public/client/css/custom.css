@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .__dropwn_parent_custom {
+    position: absolute;
+    /* width: 100%; */
+    padding: 0;
+    list-style: none;
+    background-color: #fff;
+  }
+  
+  .custom-navbar .custom-navbar-nav .__dropwn_chilren_custom {
+    color: #212529 !important;
+    text-decoration: none;
+  }
+  
+  /* inherit */
+  .dropdown-item:focus, .dropdown-item:hover,
+  .dropdown-item.active, .dropdown-item:active {
+    background: inherit;
+  }
+  
+  .__text-input {
+    width: 70px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
