@@ -4,6 +4,8 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\BlogModel;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -62,14 +64,19 @@ class PageController extends Controller
         )
         );
     }
+
+    
     public function blog()
     {
         $config = ['title' => 'Blogs'];
         $template = 'client.blog';
 
+        $blogs = BlogModel::paginate(10);
+        
         return view('client.layouts.master', compact(
             'config',
-            'template'
+            'template',
+            'blogs'
         )
         );
     }

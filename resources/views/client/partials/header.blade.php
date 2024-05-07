@@ -11,11 +11,11 @@
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
     <!-- Bootstrap CSS -->
-    <link href="client/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/client/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="client/css/tiny-slider.css" rel="stylesheet">
-    <link href="client/css/style.css" rel="stylesheet">
-    <link href="client/css/custom.css" rel="stylesheet">
+    <link href="/client/css/tiny-slider.css" rel="stylesheet">
+    <link href="/client/css/style.css" rel="stylesheet">
+    <link href="/client/css/custom.css" rel="stylesheet">
     <title>
 		{{ isset($config) ? $config['title'] : 'Trang chủ' }}
     </title>
@@ -39,11 +39,11 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li><a class="nav-link" href="shop">Shop</a></li>
-                    <li><a class="nav-link" href="about">About us</a></li>
-                    <li><a class="nav-link" href="services">Services</a></li>
-                    <li><a class="nav-link" href="blog">Blog</a></li>
-                    <li><a class="nav-link" href="contact">Contact us</a></li>
+                    <li><a class="nav-link" href="{{ route('shop') }}">Shop</a></li>
+                    <li><a class="nav-link" href="{{ route('about') }}">About us</a></li>
+                    <li><a class="nav-link" href="{{ route('services') }}">Services</a></li>
+                    <li><a class="nav-link" href="{{ route('blog') }}">Blog</a></li>
+                    <li><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
                     <li class="dropdown">
 						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">Account</a>
 						<ul class="__dropwn_parent_custom dropdown-menu">
