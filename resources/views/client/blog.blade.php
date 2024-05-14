@@ -1,4 +1,11 @@
-    <!-- Start Hero Section -->
+<style>
+    .__custom_image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+</style>
+<!-- Start Hero Section -->
     <div class="hero">
         <div class="container">
             <div class="row justify-content-between">
@@ -30,13 +37,32 @@
                 @foreach ($blogs as $item)
                     <div class="col-12 col-sm-6 col-md-4 mb-5">
                         <div class="post-entry">
-                            <a href="{{ route('blog') }}" class="post-thumbnail"><img src="client/images/post-1.jpg" alt="Image"
-                                    class="img-fluid"></a>
+                            <a href="{{ route('blog', ['id' => $item->id]) }}" class="post-thumbnail"><img src="client/images/{{ $item->urlHinh }}" alt="Image"
+                                    class="img-fluid __custom_image"></a>
                             <div class="post-content-entry">
                                 <h3><a href="#">{{ $item->tieuDe }}</a></h3>
                                 <div class="meta">
                                     <span>by <a href="#">Kristin Watson</a></span> <span>on <a
                                             href="#">{{ $item->ngayDang }}</a></span>
+                                    <span>Views: {{ $item->xem }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                {{ $blogs->links('vendor.pagination.bootstrap-5') }}
+
+                @foreach ($blogxem as $item)
+                    <div class="col-12 col-sm-6 col-md-4 mb-5">
+                        <div class="post-entry">
+                            <a href="{{ route('blog', ['id' => $item->id]) }}" class="post-thumbnail"><img src="client/images/{{ $item->urlHinh }}" alt="Image"
+                                    class="img-fluid __custom_image"></a>
+                            <div class="post-content-entry">
+                                <h3><a href="#">{{ $item->tieuDe }}</a></h3>
+                                <div class="meta">
+                                    <span>by <a href="#">Kristin Watson</a></span> <span>on <a
+                                            href="#">{{ $item->ngayDang }}</a></span>
+                                    <span>Views: {{ $item->xem }}</span>
                                 </div>
                             </div>
                         </div>
@@ -47,8 +73,6 @@
         </div>
     </div>
     <!-- End Blog Section -->
-
-
 
     <!-- Start Testimonial Slider -->
     <div class="testimonial-section before-footer-section">

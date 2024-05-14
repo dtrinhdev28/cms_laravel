@@ -1,3 +1,11 @@
+@if (session('alerts'))
+    @foreach (session('alerts') as $type => $message)
+        <div class="alert alert-{{ $type }}">
+            {{ $message }}
+        </div>
+    @endforeach
+@endif
+
 <section class="">
     <!-- Jumbotron -->
     <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
@@ -22,7 +30,7 @@
                             <h2 class="fw-bold mb-5">Sign in</h2>
 
                             <form action="/login" action="{{ route('loginAuth') }}" method="post">
-                                {{ csrf_field() }}
+                                @csrf
                                 <!-- 2 column grid layout with text inputs for the first and last names -->
                                 <!-- Email input -->
                                 <div data-mdb-input-init class="form-outline mb-4">

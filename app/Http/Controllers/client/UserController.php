@@ -5,7 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function login() {
@@ -20,8 +20,22 @@ class UserController extends Controller
         ));
     }
 
-    public function store(AuthRequest $request) {
+    //POST login
+    public function store(Request $request) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+ 
+            return redirect()->intended('/profile');
+        }
+
+        return back()->withErrors([
+            'errorLogin' => 'Email or password do not match',
+        ])->onlyInput('errorLogin');
     }
 
     public function register() {
@@ -32,6 +46,32 @@ class UserController extends Controller
 
         $template = 'client.register';
       
+        return view('client.layouts.master', compact(
+            'config','template'
+        ));
+    }
+
+    // GET profile
+    public function profile() {
+        $config = [
+            'title' => 'Profile'
+        ];
+
+        $template = 'client.profile';
+      
+        return view('client.layouts.master', compact(
+            'config','template'
+        ));
+    }
+
+    // GET forgot-password
+    public function forgotpassword() {
+        $config = [
+            'title' => 'Profile'
+        ];
+
+        $template = 'client.forgot-password';
+
         return view('client.layouts.master', compact(
             'config','template'
         ));

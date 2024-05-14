@@ -16,13 +16,12 @@
         <div class="row">
             <aside class="col-lg-6">
                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
-                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image"
-                        href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp">
+                    <span data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image">
                         <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
-                            src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp" />
-                    </a>
+                            src="{{ $productBySlug->image }}" />
+                    </span>
                 </div>
-                <div class="d-flex justify-content-center mb-3">
+                {{-- <div class="d-flex justify-content-center mb-3">
                     <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
                         href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big1.webp"
                         class="item-thumb">
@@ -53,12 +52,12 @@
                         <img width="60" height="60" class="rounded-2"
                             src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp" />
                     </a>
-                </div>
-            </aside>
+                    </div> --}}
+                </aside>
             <main class="col-lg-6">
                 <div class="ps-lg-3">
                     <h4 class="title text-dark">
-                        Tên sản phẩm
+                        {{ $productBySlug->name }}
                     </h4>
                     <div class="d-flex flex-row my-3">
                         <div class="text-warning mb-1 me-2">
@@ -76,53 +75,58 @@
                     </div>
 
                     <div class="mb-3 p-4 rounded" style="background-color: #FAFAFA;">
-                        <del class="h6 text-dark">
-                            Giá sản phẩm
-                        </del> &nbsp;
-                        <span class="text-danger h5">
-                            Giá sản phẩm sale
-                        </span> &nbsp;
+
+                        @if ($productBySlug->price_promotion === null || $productBySlug->price_promotion === 0)
+                            <span class="h6 text-dark">
+                                {{ $productBySlug->price }}
+                            </span> &nbsp;
+                        @else
+                            <del class="product-price">{{ number_format($productBySlug->price, 0, '.', '.') }} VNĐ</del>
+                            <span class="fw-bold text-danger product-price">
+                                {{ number_format($productBySlug->price_promotion, 0, '.', '.') }} VNĐ</span>
+                        @endif
+
                         <span class="badge p-2 bg-danger">
-                            23%
-                            GIẢM
+                            {{ floor((($productBySlug->price - $productBySlug->price_promotion) / $productBySlug->price) * 100) }} %
                         </span>
 
                     </div>
 
                     <p>
-                        Mô tả sản phẩm
+                        <strong>Mô tả sản phẩm:</strong>
+                        {{ $productBySlug->description }}
                     </p>
 
                     <div class="row">
                         <dt class="col-3">Danh mục:</dt>
-                        <dd class="col-9">Sách Hướng Nghiệp & Phát Triển Bản Thân</dd>
+                        <dd class="col-9">{{ $productBySlug->name_category }}</dd>
 
-                        <dt class="col-3">Thể loại:</dt>
-                        <dd class="col-9">Regular</dd>
+                        <dt class="col-3">Màu sắc:</dt>
+                        <dd class="col-9">{{ $productBySlug->colors }}</dd>
 
-                        <dt class="col-3">Tác giả:</dt>
-                        <dd class="col-9">Brown</dd>
-
-
-                        <dt class="col-3">Brand</dt>
-                        <dd class="col-9">Reebook</dd>
+                        {{-- <dt class="col-3">Brand</dt>
+                        <dd class="col-9">Reebook</dd> --}}
                         <hr>
                         <div class="col-3">Số lượng:</div>
                         <div class="col-9">
                             <div class="input-group mb-4">
                                 <span class="input-group-text" id="basic-addon1">-</span>
-                                <input type="text" class="text-center __text-input" placeholder="1">
+                                <input type="text" value="1" class="text-center __text-input" placeholder="1">
                                 <span class="input-group-text" id="basic-addon1">+</span>
-                                <span class="d-flex align-items-center ms-3">33 sản phẩm có sẵn</span>
+                                <span class="d-flex align-items-center ms-3">{{ $productBySlug->stock }} sản phẩm có sẵn</span>
                             </div>
 
                         </div>
                     </div>
-                    <a href="#" class="btn btn-primary shadow-0"> <i class="me-1 fa fa-shopping-basket"></i>
+                    <form method="POST" action=""  class="btn btn-primary shadow-0"> 
+                        @csrf
+
+                        <i class="me-1 fa fa-shopping-basket"></i>
                         Add to
-                        cart</a>
-                    <a href="#" class="btn btn-primary text-primary shadow-0 mx-3"
-                        style="background-color: #3b5d5033;">Buy now</a>
+                        cart
+                    </form>
+                    {{-- <a href="#" class="btn btn-primary text-primary shadow-0 mx-3"
+                        style="background-color: #3b5d5033;">Buy now</a> --}}
                 </div>
             </main>
         </div>

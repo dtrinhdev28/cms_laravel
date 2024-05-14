@@ -17,7 +17,7 @@
     <link href="/client/css/style.css" rel="stylesheet">
     <link href="/client/css/custom.css" rel="stylesheet">
     <title>
-		{{ isset($config) ? $config['title'] : 'Trang chủ' }}
+        {{ isset($config) ? $config['title'] : 'Trang chủ' }}
     </title>
 </head>
 
@@ -42,18 +42,27 @@
                     <li><a class="nav-link" href="{{ route('shop') }}">Shop</a></li>
                     <li><a class="nav-link" href="{{ route('about') }}">About us</a></li>
                     <li><a class="nav-link" href="{{ route('services') }}">Services</a></li>
-                    <li><a class="nav-link" href="{{ route('blog') }}">Blog</a></li>
+                    <li><a class="nav-link" href="{{ route('blogs') }}">Blog</a></li>
                     <li><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
                     <li class="dropdown">
-						<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">Account</a>
-						<ul class="__dropwn_parent_custom dropdown-menu">
-							<li><a class="dropdown-item __dropwn_chilren_custom" href="/login">Login</a></li>
-							<li><a class="dropdown-item __dropwn_chilren_custom" href="/register">Register</a></li>
-						</ul>
-					</li>
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                        href="">Account</a>
+                        @if ($user)
+                        <ul class="__dropwn_parent_custom dropdown-menu">
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="">{{ $user->name }}</a></li>
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('profile') }}">My account</a></li>
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('logout') }}">Logout</a></li>
+                        </ul>
+                        @else
+                        <ul class="__dropwn_parent_custom dropdown-menu">
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/login">Login</a></li>
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/register">Register</a></li>
+                        </ul>
+                        @endif
+                    </li>
                 </ul>
 
-               
+
             </div>
         </div>
 
