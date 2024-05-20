@@ -1,123 +1,96 @@
-  <!-- Start Hero Section -->
-  <div class="hero">
-      <div class="container">
-          <div class="row justify-content-between">
-              <div class="col-lg-5">
-                  <div class="intro-excerpt">
-                      <h1>Cart</h1>
-                  </div>
-              </div>
-              <div class="col-lg-7">
-
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- End Hero Section -->
-
-
-
   <div class="untree_co-section before-footer-section">
       <div class="container">
           <div class="row mb-5">
-              <form class="col-md-12" method="post">
-                  <div class="site-blocks-table">
-                      <table class="table">
-                          <thead>
-                              <tr>
-                                  <th class="product-thumbnail">Image</th>
-                                  <th class="product-name">Product</th>
-                                  <th class="product-price">Price</th>
-                                  <th class="product-quantity">Quantity</th>
-                                  <th class="product-total">Total</th>
-                                  <th class="product-remove">Remove</th>
-                              </tr>
-                          </thead>
-                          <tbody>
+              {{-- <form class="col-md-12" method="post"> --}}
+              <div class="site-blocks-table">
+
+                  @if (session('alerts'))
+                      @foreach (session('alerts') as $type => $message)
+                          <div class="alert alert-{{ $type }}">
+                              {{ $message }}
+                          </div>
+                      @endforeach
+                  @endif
+
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th class="product-thumbnail">Image</th>
+                              <th class="product-name">Product</th>
+                              <th class="product-price">Price</th>
+                              <th class="product-quantity">Quantity</th>
+                              <th class="product-total">Total</th>
+                              <th class="product-remove">Remove</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($getcartbyuser as $item)
                               <tr>
                                   <td class="product-thumbnail">
-                                      <img src="images/product-1.png" alt="Image" class="img-fluid">
+                                      <a href="detail/{{ $item->slug }}"> <img
+                                              src="/client/images/productsImage/{{ $item->image }}"
+                                              style="height: 100px" alt="Image" class="img-fluid"></a>
                                   </td>
                                   <td class="product-name">
-                                      <h2 class="h5 text-black">Product 1</h2>
+                                      <h2 class="h5 text-black">{{ $item->name }}</h2>
                                   </td>
-                                  <td>$49.00</td>
+                                  <td> {{ number_format($item->price, '0', '.', '.') }} VNĐ</td>
                                   <td>
                                       <div class="input-group mb-3 d-flex align-items-center quantity-container"
                                           style="max-width: 120px;">
                                           <div class="input-group-prepend">
-                                              <button class="btn btn-outline-black decrease"
-                                                  type="button">&minus;</button>
+                                              <button class="btn btn-primary decrease" type="button">&minus;</button>
                                           </div>
                                           <input type="text" class="form-control text-center quantity-amount"
-                                              value="1" placeholder="" aria-label="Example text with button addon"
+                                              value="{{ $item->quantity }}" placeholder=""
+                                              aria-label="Example text with button addon"
                                               aria-describedby="button-addon1">
                                           <div class="input-group-append">
-                                              <button class="btn btn-outline-black increase"
-                                                  type="button">&plus;</button>
+                                              <button class="btn btn-primary increase" type="button">&plus;</button>
                                           </div>
                                       </div>
-
                                   </td>
-                                  <td>$49.00</td>
-                                  <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                              </tr>
-
-                              <tr>
-                                  <td class="product-thumbnail">
-                                      <img src="images/product-2.png" alt="Image" class="img-fluid">
-                                  </td>
-                                  <td class="product-name">
-                                      <h2 class="h5 text-black">Product 2</h2>
-                                  </td>
-                                  <td>$49.00</td>
+                                  <td>{{ number_format($item->price * $item->quantity, '0', '.', '.') }} VNĐ</td>
                                   <td>
-                                      <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                          style="max-width: 120px;">
-                                          <div class="input-group-prepend">
-                                              <button class="btn btn-outline-black decrease"
-                                                  type="button">&minus;</button>
-                                          </div>
-                                          <input type="text" class="form-control text-center quantity-amount"
-                                              value="1" placeholder="" aria-label="Example text with button addon"
-                                              aria-describedby="button-addon1">
-                                          <div class="input-group-append">
-                                              <button class="btn btn-outline-black increase"
-                                                  type="button">&plus;</button>
-                                          </div>
-                                      </div>
-
+                                      <form method="POST" action="{{ route('delete.cart') }}">
+                                          {{ csrf_field() }}
+                                          <input type="hidden" name="cart_id" value="{{ $item->cart }}">
+                                          <button class="btn btn-black btn-sm">X</button>
+                                      </form>
                                   </td>
-                                  <td>$49.00</td>
-                                  <td><a href="#" class="btn btn-black btn-sm">X</a></td>
                               </tr>
-                          </tbody>
-                      </table>
-                  </div>
-              </form>
+                          @endforeach
+
+                      </tbody>
+                  </table>
+              </div>
+              {{-- </form> --}}
           </div>
 
           <div class="row">
               <div class="col-md-6">
                   <div class="row mb-5">
-                      <div class="col-md-6 mb-3 mb-md-0">
-                          <button class="btn btn-black btn-sm btn-block">Update Cart</button>
-                      </div>
                       <div class="col-md-6">
-                          <button class="btn btn-outline-black btn-sm btn-block">Continue Shopping</button>
+                          <button class="btn btn-outline-primary btn-sm btn-primary">Continue Shopping</button>
                       </div>
                   </div>
                   <div class="row">
-                      <div class="col-md-12">
-                          <label class="text-black h4" for="coupon">Coupon</label>
-                          <p>Enter your coupon code if you have one.</p>
-                      </div>
-                      <div class="col-md-8 mb-3 mb-md-0">
-                          <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-                      </div>
-                      <div class="col-md-4">
-                          <button class="btn btn-black">Apply Coupon</button>
-                      </div>
+
+                      <form id="vourcher" action="">
+                          <div class="col-md-12">
+                              <label class="text-black h4" for="coupon">Coupon</label>
+                              <p>Enter your coupon code if you have one.</p>
+                          </div>
+                          <div class="col-md-8 mb-3 mb-md-0">
+                              <input type="text" name="coupon" class="form-control py-3" id="coupon"
+                                  placeholder="Coupon Code">
+                              <p id="messageVourcher"></p>
+                          </div>
+                          <div class="col-md-4">
+                              <button type="button" id="btnCoupon" class="btn btn-primary">Apply Coupon</button>
+                          </div>
+                      </form>
+
                   </div>
               </div>
               <div class="col-md-6 pl-5">
@@ -128,27 +101,27 @@
                                   <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
                               </div>
                           </div>
-                          <div class="row mb-3">
+                          <div class="row mb-2">
                               <div class="col-md-6">
                                   <span class="text-black">Subtotal</span>
                               </div>
+
+                              @php
+                                  $sum = 0;
+                                  foreach ($getcartbyuser as $item) {
+                                      $sum += $item->price * $item->quantity;
+                                  }
+                              @endphp
+
                               <div class="col-md-6 text-right">
-                                  <strong class="text-black">$230.00</strong>
-                              </div>
-                          </div>
-                          <div class="row mb-5">
-                              <div class="col-md-6">
-                                  <span class="text-black">Total</span>
-                              </div>
-                              <div class="col-md-6 text-right">
-                                  <strong class="text-black">$230.00</strong>
+                                  <strong class="text-black">{{ number_format($sum, '0', '.', '.') }} VNĐ</strong>
                               </div>
                           </div>
 
                           <div class="row">
                               <div class="col-md-12">
-                                  <button class="btn btn-black btn-lg py-3 btn-block"
-                                      onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                  <button class="btn btn-primary btn-lg mt-3 btn-block"
+                                      onclick="window.location='checkout'">Proceed To Checkout</button>
                               </div>
                           </div>
                       </div>
@@ -157,3 +130,18 @@
           </div>
       </div>
   </div>
+
+  {{-- handler Ajax coupon start --}}
+
+  @if (isset($config['jquery']))
+      <script src="{{ $config['jquery'] }}"></script>
+  @endif
+
+  {{-- <script>
+      $(document).ready(function() {
+        $('#btnCoupon').click(function(e) {
+            e.preventDefault();
+        })
+      });
+  </script> --}}
+  {{-- handler Ajax coupon end --}}

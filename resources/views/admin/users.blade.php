@@ -25,9 +25,9 @@
                 <td>{{ $item->address }}</td>
                 <td>{{ $item->numberphone }}</td>
                 <td>
-                    @if ($item->role === '0')
+                    @if ($item->role === '1')
                         <span class="badge text-bg-secondary">Client</span>
-                        @elseif($item->role === '1')
+                        @elseif($item->role === '0')
                         <span class="badge text-light text-bg-info">Admin</span>
                     @endif
                 </td>

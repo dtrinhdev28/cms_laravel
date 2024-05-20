@@ -4,8 +4,10 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
+use App\Models\UsersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function login() {
@@ -29,7 +31,6 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
             return redirect()->intended('/profile');
         }
 
@@ -75,5 +76,25 @@ class UserController extends Controller
         return view('client.layouts.master', compact(
             'config','template'
         ));
+    }
+
+    // POST update password
+    public function updatePassword(Request $requets) {
+        $payload = $requets->all();
+
+        $requets->validate([
+            'currentpassword' => 'required',
+            'newpassword' => 'required',
+            'confirmpassword' => 'required'
+        ]);
+
+        // check password
+        if(!Hash::check($requets->currentpassword, \Auth::user()->password )) {
+            dd("Password not matching");
+        };
+
+        UsersModel::whereId(\Auth::user()->id)->update([
+            'password' => Hash::make($requets->newpassword)
+        ]);
     }
 }

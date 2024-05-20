@@ -26,9 +26,29 @@
     width: 70px;
     border: 1px solid #ccc;
     font-size: 16px;
+    height: 38px;
   }
 
   .navbar-expand-md .navbar-nav .dropdown-menu {
     left: calc(-100% + -80px);
     right: 0;
+  }
+
+  .product-section .product-item .product-thumbnail {
+    height: 300px;
+    width: 100%;
+  }
+
+  .btn {
+    border-radius: 16px !important;
+    padding: 10px 20px;
+  }
+
+  .product-item {
+    text-decoration: none;
+  }
+
+  .product-title {
+    font-size: 18px;
+    margin-top: 10px;
   }

@@ -48,8 +48,8 @@
     <div class="col-md-6">
         <label for="role" class="form-label">Roles</label>
         <select class="form-control" name="role" id="role">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
+            <option value="1">User</option>
+            <option value="0">Admin</option>
         </select>
     </div>
 

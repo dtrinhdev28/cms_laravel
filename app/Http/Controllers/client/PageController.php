@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\CategoryModel;
 use App\Models\CommentsModel;
+use App\Models\ImageProductModel;
+use App\Models\ViewersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\BlogModel;
@@ -16,9 +19,15 @@ class PageController extends Controller
         $config = ['title' => 'Trang chủ'];
         $template = 'client.index';
 
+        $products = ProductsModel::take('3')->get();
+
+        $blogs = BlogModel::take('3')->orderBy('ngayDang', 'DESC')->get();
+
         return view('client.layouts.master', compact(
             'config',
-            'template'
+            'template',
+            'blogs',
+            'products'
         )
         );
     }
@@ -60,12 +69,26 @@ class PageController extends Controller
         $config = ['title' => 'Shop'];
         $template = 'client.shop';
 
-        $getAllProduct = ProductsModel::paginate(16);
+        $getAllProduct = ProductsModel::paginate(12);
+        $getAllCategory = CategoryModel::get();
+
+        $viewers = [''];
+        if(\Auth::check()) {
+            $viewers =  ViewersModel::
+            select('products.*')
+            ->leftJoin('products','products.id_product', '=', 'viewer.id_product')
+            ->leftJoin('users','users.id', '=', 'viewer.id_user')
+            ->where('users.id', '=', \Auth::user()->id)
+            ->where('products.hidden', '=', 1)
+            ->get();
+        }
 
         return view('client.layouts.master', compact(
             'config',
             'template',
-            'getAllProduct'
+            'getAllProduct',
+            'getAllCategory',
+            'viewers'
         )
         );
     }

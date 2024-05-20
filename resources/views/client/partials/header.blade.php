@@ -12,7 +12,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/client/icon/css/all.min.css">
     <link href="/client/css/tiny-slider.css" rel="stylesheet">
     <link href="/client/css/style.css" rel="stylesheet">
     <link href="/client/css/custom.css" rel="stylesheet">
@@ -46,11 +46,20 @@
                     <li><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
                     <li class="dropdown">
                         <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+                        href="">Language</a>
+                        <ul class="__dropwn_parent_custom dropdown-menu">
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/">English</a></li>
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/">VietNam</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                         href="">Account</a>
                         @if ($user)
                         <ul class="__dropwn_parent_custom dropdown-menu">
                             <li><a class="dropdown-item __dropwn_chilren_custom" href="">{{ $user->name }}</a></li>
                             <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('profile') }}">My account</a></li>
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('cart') }}">My cart</a></li>
                             <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('logout') }}">Logout</a></li>
                         </ul>
                         @else

@@ -17,7 +17,7 @@
               </a>
               <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
                   <li>
-                      <a href="components-list-group.html" class="active">
+                      <a href="{{ route('getAllUsers') }}" class="active">
                         <i class="bi bi-person"></i><span>Manager Users</span>
                       </a>
                   </li>

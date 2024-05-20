@@ -50,16 +50,19 @@ class UserController extends Controller
     public function store(UserRequest $request) {
         $payload = request()->all();
 
-        $user = new UsersModel();
-        $user->name = $payload['name'];
-        $user->email = $payload['email'];
-        $user->numberphone = $payload['numberphone'];
-        $user->address = $payload['address'];
-        $user->role = $payload['role'];
-        $user->avatar = $payload['avatar'];
-        $user->password = bcrypt($payload['password']);
+        $results  = UsersModel::create([
+            'name' => $payload['name'],
+            'email' => $payload['email'],
+            'numberphone' => $payload['numberphone'],
+            'address' => $payload['address'],
+            'role' => $payload['role'],
+            'avatar' => $payload['avatar'],
+            'password' => bcrypt($payload['password']),
+        ]);
 
-        $user->save();
-        return Redirect::route('createUser')->with('alerts', ['success' => 'Create A User Successfully']);
+        if($results) {
+            return Redirect::route('createUser')->with('alerts', ['success' => 'Create A User Successfully']);
+        }
+
     }
 }

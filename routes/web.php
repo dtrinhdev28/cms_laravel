@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\client\UserController;
 use App\Http\Controllers\client\PageController;
@@ -25,6 +26,9 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'store'])->name('loginAuth');
 Route::get('/forgot-password', [UserController::class, 'forgotpassword'])->name('forgot-pasword')->middleware('auth');
 Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('auth');
+// change passowrd
+Route::post('/updatedPassword', [UserController::class, 'updatePassword'])->name('change.password')->middleware('auth');
+
 // logout
 Route::get('/logout', function(Request $request) {
     Auth::logout();
@@ -35,12 +39,16 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 // product
 Route::get('/detail/{slug}', [ProductController::class, 'detail'])->name('detail');
 
+// cart 
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::post('/cart', [ProductController::class, 'addToCart'])->name('add.to.cart')->middleware('auth');
+Route::post('/cart/delete', [CartController::class, 'destroy'])->name('delete.cart')->middleware('auth');
 
-// page admin
+// ADMIN
 Route::prefix('admin')->group(function () {
     Route::get('/users', [AdminUserController::class, 'index'])->name('getAllUsers')->middleware('auth');
-    Route::get('/user/create', [AdminUserController::class, 'create'])->name('createUser')->middleware('auth');
-    Route::post('/user/create', [AdminUserController::class, 'store'])->name('userStore')->middleware('auth');
+    Route::get('/user/create', [AdminUserController::class, 'create'])->name('createUser');
+    Route::post('/user/create', [AdminUserController::class, 'store'])->name('userStore');
     // Route::post('/delete', [AdminUserController::class, 'index'])->name('get_all_users');
     // Route::delete('/destroy', [AdminUserController::class, 'index'])->name('get_all_users');
 });

@@ -35,47 +35,28 @@
                 </div>
                 <!-- End Column 1 -->
 
-                <!-- Start Column 2 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="/client/images/product-1.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Nordic Chair</h3>
-                        <strong class="product-price">$50.00</strong>
+                @foreach ($products as $item)
+                    <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                        <a class="product-item" href="detail/{{ $item->slug }}">
+                            <img src="/client/images/productsImage/{{ $item->image }}" onerror="this.src='/error/404.gif'"
+                                class="img-fluid product-thumbnail">
+                            <h3 class="product-title">{{ $item->name }}</h3>
 
-                        <span class="icon-cross">
-                            <img src="/client/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 2 -->
+                            @if ($item->price_promotion === null || $item->price_promotion === 0)
+                                <strong class="product-price">{{ number_format($item->price, 0, '.', '.') }}
+                                    VNĐ</strong>
+                            @else
+                                <del class="product-price">{{ number_format($item->price, 0, '.', '.') }} VNĐ</del>
+                                <p class="fw-bold text-danger product-price">
+                                    {{ number_format($item->price_promotion, 0, '.', '.') }} VNĐ</p>
+                            @endif
 
-                <!-- Start Column 3 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="/client/images/product-2.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Kruzo Aero Chair</h3>
-                        <strong class="product-price">$78.00</strong>
-
-                        <span class="icon-cross">
-                            <img src="/client/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 3 -->
-
-                <!-- Start Column 4 -->
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <a class="product-item" href="cart.html">
-                        <img src="/client/images/product-3.png" class="img-fluid product-thumbnail">
-                        <h3 class="product-title">Ergonomic Chair</h3>
-                        <strong class="product-price">$43.00</strong>
-
-                        <span class="icon-cross">
-                            <img src="/client/images/cross.svg" class="img-fluid">
-                        </span>
-                    </a>
-                </div>
-                <!-- End Column 4 -->
+                            <span class="icon-cross">
+                                <img src="/client/images/cross.svg" class="img-fluid">
+                            </span>
+                        </a>
+                    </div>
+                @endforeach
 
             </div>
         </div>
@@ -355,6 +336,15 @@
     </div>
     <!-- End Testimonial Slider -->
 
+
+    <style>
+        .__custom_image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+    </style>
+
     <!-- Start Blog Section -->
     <div class="blog-section">
         <div class="container">
@@ -363,55 +353,25 @@
                     <h2 class="section-title">Recent Blog</h2>
                 </div>
                 <div class="col-md-6 text-start text-md-end">
-                    <a href="#" class="more">View All Posts</a>
+                    <a href="{{ route('blogs') }}" class="more">View All Posts</a>
                 </div>
             </div>
 
             <div class="row">
-
-                <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-                    <div class="post-entry">
-                        <a href="#" class="post-thumbnail"><img src="/client/images/post-1.jpg" alt="Image"
-                                class="img-fluid"></a>
-                        <div class="post-content-entry">
-                            <h3><a href="#">First Time Home Owner Ideas</a></h3>
-                            <div class="meta">
-                                <span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec
-                                        19,
-                                        2021</a></span>
+                @foreach ($blogs as $item)
+                    <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+                        <div class="post-entry">
+                            <a href="blog/{{ $item->id }}" class="post-thumbnail"><img class="__custom_image"
+                                    src="/client/images/{{ $item->urlHinh }}" alt="Image" class="img-fluid"></a>
+                            <div class="post-content-entry">
+                                <h3><a href="#">{{ $item->tieuDe }}</a></h3>
+                                <div class="meta">
+                                    <span>{{ date('Y-m-d', strtotime($item->ngayDang)) }}</a></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-                    <div class="post-entry">
-                        <a href="#" class="post-thumbnail"><img src="/client/images/post-2.jpg" alt="Image"
-                                class="img-fluid"></a>
-                        <div class="post-content-entry">
-                            <h3><a href="#">How To Keep Your Furniture Clean</a></h3>
-                            <div class="meta">
-                                <span>by <a href="#">Robert Fox</a></span> <span>on <a href="#">Dec 15,
-                                        2021</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-                    <div class="post-entry">
-                        <a href="#" class="post-thumbnail"><img src="/client/images/post-3.jpg" alt="Image"
-                                class="img-fluid"></a>
-                        <div class="post-content-entry">
-                            <h3><a href="#">Small Space Furniture Apartment Ideas</a></h3>
-                            <div class="meta">
-                                <span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec
-                                        12,
-                                        2021</a></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
         </div>

@@ -15,45 +15,28 @@
     <div class="container">
         <div class="row">
             <aside class="col-lg-6">
+
                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
                     <span data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image">
-                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit"
-                            src="{{ $productBySlug->image }}" />
+                        <img style="max-width: 100%; height:500px ;max-height: 100vh; margin: auto;"
+                            class="rounded-4 fit" src="/client/images/productsImage/{{ $productBySlug->image }}" />
                     </span>
                 </div>
-                {{-- <div class="d-flex justify-content-center mb-3">
-                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                        href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big1.webp"
-                        class="item-thumb">
-                        <img width="60" height="60" class="rounded-2"
-                            src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big1.webp" />
-                    </a>
-                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                        href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big2.webp"
-                        class="item-thumb">
-                        <img width="60" height="60" class="rounded-2"
-                            src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big2.webp" />
-                    </a>
-                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                        href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big3.webp"
-                        class="item-thumb">
-                        <img width="60" height="60" class="rounded-2"
-                            src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big3.webp" />
-                    </a>
-                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                        href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big4.webp"
-                        class="item-thumb">
-                        <img width="60" height="60" class="rounded-2"
-                            src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big4.webp" />
-                    </a>
-                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image"
-                        href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp"
-                        class="item-thumb">
-                        <img width="60" height="60" class="rounded-2"
-                            src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big.webp" />
-                    </a>
-                    </div> --}}
-                </aside>
+                <div class="d-flex justify-content-center mb-3">
+
+                    @if ($imageAray !== [''])
+                        @foreach ($imageAray as $item)
+                            <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="" data-type="image"
+                                href="" class="item-thumb">
+                                <img width="60" height="60" class="rounded-2"
+                                    src="/client/images/productsImage/{{ $item }}" />
+                            </a>
+                        @endforeach
+                    @endif
+                </div>
+            </aside>
+
+
             <main class="col-lg-6">
                 <div class="ps-lg-3">
                     <h4 class="title text-dark">
@@ -87,7 +70,8 @@
                         @endif
 
                         <span class="badge p-2 bg-danger">
-                            {{ floor((($productBySlug->price - $productBySlug->price_promotion) / $productBySlug->price) * 100) }} %
+                            {{ floor((($productBySlug->price - $productBySlug->price_promotion) / $productBySlug->price) * 100) }}
+                            %
                         </span>
 
                     </div>
@@ -101,29 +85,63 @@
                         <dt class="col-3">Danh mục:</dt>
                         <dd class="col-9">{{ $productBySlug->name_category }}</dd>
 
-                        <dt class="col-3">Màu sắc:</dt>
-                        <dd class="col-9">{{ $productBySlug->colors }}</dd>
+                        <dt class="col-3">Lượt xem:</dt>
+                        <dd class="col-9">{{ $productBySlug->views }} <i class="fa-solid fa-eye"></i></dd>
 
                         {{-- <dt class="col-3">Brand</dt>
                         <dd class="col-9">Reebook</dd> --}}
                         <hr>
-                        <div class="col-3">Số lượng:</div>
-                        <div class="col-9">
-                            <div class="input-group mb-4">
-                                <span class="input-group-text" id="basic-addon1">-</span>
-                                <input type="text" value="1" class="text-center __text-input" placeholder="1">
-                                <span class="input-group-text" id="basic-addon1">+</span>
-                                <span class="d-flex align-items-center ms-3">{{ $productBySlug->stock }} sản phẩm có sẵn</span>
-                            </div>
-
-                        </div>
                     </div>
-                    <form method="POST" action=""  class="btn btn-primary shadow-0"> 
+                    <form method="POST" action="{{ route('add.to.cart') }}">
+                        <div class="row">
+                            <div class="col-3">Số lượng:</div>
+                            <div class="col-9">
+                                <div class="input-group mb-4">
+                                    {{-- <span class="input-group-text" id="basic-addon1">-</span>
+                                    <input type="text" name="quantitybuy" value="1"
+                                        class="text-center __text-input" placeholder="1">
+                                    <span class="input-group-text" id="basic-addon1">+</span> --}}
+
+                                    <div class="input-group quantity-container">
+                                        <div class="input-group-prepend">
+                                            <button class="input-group-text decrease" type="button">&minus;</button>
+                                        </div>
+
+                                        <input type="text" name="quantitybuy"
+                                            class="__text-input text-center quantity-amount" value="1"
+                                            placeholder="" aria-label="Example text with button addon"
+                                            aria-describedby="button-addon1">
+                                        <div class="input-group-append">
+
+                                            <button class="input-group-text increase" type="button">&plus;</button>
+                                        </div>
+                                    </div>
+                                    <span class="d-flex align-items-center ms-3">{{ $productBySlug->stock }} sản phẩm
+                                        có
+                                        sẵn</span>
+                                </div>
+
+
+                            </div>
+                        </div>
                         @csrf
 
-                        <i class="me-1 fa fa-shopping-basket"></i>
-                        Add to
-                        cart
+                        @php
+                            if ($productBySlug->price_promotion === null || $productBySlug->price_promotion === 0) {
+                                $price_buy = $productBySlug->price;
+                            } else {
+                                $price_buy = $productBySlug->price_promotion;
+                            }
+
+                        @endphp
+
+                        <input type="hidden" name="id_product" value="{{ $productBySlug->id_product }}">
+                        <input type="hidden" name="price" value="{{ $price_buy }}">
+
+                        <button class="btn btn-primary shadow-0">
+                            <i class="me-1 fa fa-shopping-basket"></i>
+                            Add to cart
+                        </button>
                     </form>
                     {{-- <a href="#" class="btn btn-primary text-primary shadow-0 mx-3"
                         style="background-color: #3b5d5033;">Buy now</a> --}}
@@ -132,3 +150,78 @@
         </div>
     </div>
 </section>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<!-- Demo styles -->
+<style>
+    .swiper {}
+
+    .swiper-slide {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .swiper-slide img {
+        height: 200px;
+        width: 100%;
+    }
+
+    .product-item {
+        box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+    }
+
+    .product-item:hover {
+        transition: 0.3s linear;
+        box-shadow: rgba(100, 100, 111, 0.4) 0px 7px 29px 0px;
+    }
+
+</style>
+
+<div class="container">
+    <div class="row">
+
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                @foreach ($productsType as $item)
+                    <div class="swiper-slide col-12 col-md-2 col-md-3 col-lg-3 mb-5">
+                        <a class="product-item" href="/detail/{{ $item->slug }}">
+                            <img src="/client/images/productsImage/{{ $item->image }}"
+                                onerror="this.src='/error/404.gif'" class="img-fluid product-thumbnail">
+                            <h3 class="product-title">{{ $item->name }}</h3>
+                            @if ($item->price_promotion === null || $item->price_promotion === 0)
+                                <strong class="product-price">{{ number_format($item->price, 0, '.', '.') }}
+                                    VNĐ</strong>
+                            @else
+                                <del class="product-price">{{ number_format($item->price, 0, '.', '.') }}
+                                    VNĐ</del>
+                                <p class="fw-bold text-danger product-price">
+                                    {{ number_format($item->price_promotion, 0, '.', '.') }} VNĐ</p>
+                            @endif
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 6,
+        spaceBetween: 30,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+    });
+</script>
