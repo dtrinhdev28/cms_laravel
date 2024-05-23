@@ -22,6 +22,7 @@ class UsersModel extends Authenticatable
         'name',
         'email',
         'password',
+        ''
     ];
 
     /**

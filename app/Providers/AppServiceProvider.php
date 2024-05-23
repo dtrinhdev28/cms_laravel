@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Models\CategoryModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        
+        $category = CategoryModel::get();
+        View::share('category', $category);
     }
 }

@@ -10,7 +10,10 @@
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.4"
+        "livewire/livewire": "^3.4",
+        "swiftmailer/swiftmailer": "*",
+        "symfony/http-client": "*",
+        "symfony/mailgun-mailer": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

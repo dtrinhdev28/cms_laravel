@@ -39,34 +39,49 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/">Home</a>
                     </li>
-                    <li><a class="nav-link" href="{{ route('shop') }}">Shop</a></li>
-                    <li><a class="nav-link" href="{{ route('about') }}">About us</a></li>
-                    <li><a class="nav-link" href="{{ route('services') }}">Services</a></li>
-                    <li><a class="nav-link" href="{{ route('blogs') }}">Blog</a></li>
-                    <li><a class="nav-link" href="{{ route('contact') }}">Contact us</a></li>
+                    <li><a class="nav-link" href="{{ route('shop') }}">Cửa hàng</a></li>
                     <li class="dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                        href="">Language</a>
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">Danh
+                            mục</a>
                         <ul class="__dropwn_parent_custom dropdown-menu">
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/">English</a></li>
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/">VietNam</a></li>
+                            @foreach ($category as $item)
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/danhmuc/{{ $item->id }}">
+                                        {{ $item->name_category }}
+                                    </a></li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    <li><a class="nav-link" href="{{ route('about') }}">Giới thiệu</a></li>
+                    <li><a class="nav-link" href="{{ route('services') }}">Dịch vụ</a></li>
+                    <li><a class="nav-link" href="{{ route('blogs') }}">Tin tức</a></li>
+                    <li><a class="nav-link" href="{{ route('contact') }}">Liên hệ</a></li>
+                    <li class="dropdown">
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">Ngôn
+                            ngữ</a>
+                        <ul class="__dropwn_parent_custom dropdown-menu">
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/">Tiếng Anh</a></li>
+                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/">Tiếng Việt</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
-                        href="">Account</a>
+                        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" href="">Tài
+                            khoản</a>
                         @if ($user)
-                        <ul class="__dropwn_parent_custom dropdown-menu">
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="">{{ $user->name }}</a></li>
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('profile') }}">My account</a></li>
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('cart') }}">My cart</a></li>
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('logout') }}">Logout</a></li>
-                        </ul>
+                            <ul class="__dropwn_parent_custom dropdown-menu">
+                                <li><a class="dropdown-item __dropwn_chilren_custom"
+                                        href="">{{ $user->name }}</a></li>
+                                <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('profile') }}">Tài
+                                        khoản</a></li>
+                                <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('cart') }}">Giỏ
+                                        hàng</a></li>
+                                <li><a class="dropdown-item __dropwn_chilren_custom" href="{{ route('logout') }}">Đăng
+                                        xuất</a></li>
+                            </ul>
                         @else
-                        <ul class="__dropwn_parent_custom dropdown-menu">
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/login">Login</a></li>
-                            <li><a class="dropdown-item __dropwn_chilren_custom" href="/register">Register</a></li>
-                        </ul>
+                            <ul class="__dropwn_parent_custom dropdown-menu">
+                                <li><a class="dropdown-item __dropwn_chilren_custom" href="/login">Đăng nhập</a></li>
+                                <li><a class="dropdown-item __dropwn_chilren_custom" href="/register">Đăng ký</a></li>
+                            </ul>
                         @endif
                     </li>
                 </ul>

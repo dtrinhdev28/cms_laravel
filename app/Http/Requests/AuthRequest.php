@@ -22,19 +22,22 @@ class AuthRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'name' => 'required',
             'email' => 'required|unique:users,email',
-            'password' => 'required|min:6',
+            'password' => 'required|min:8',
         ];
     }
 
     public function messages(): array
     {
         return [
+            'name.required' => 'Fullname field is required',
+
             'email.required' => 'Email field is required',
             'email.unique' => 'Email is already exist',
 
             'password.required' => 'Password field is required',
-            'password.min' => 'Password minlength 6 ',
+            'password.min' => 'Password minlength 8 ',
         ];
     }
 }

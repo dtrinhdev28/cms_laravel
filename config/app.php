@@ -104,7 +104,7 @@ return [
         ...array_filter(
             explode(',', env('APP_PREVIOUS_KEYS', ''))
         ),
-    ],    
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -126,5 +126,5 @@ return [
 
     // Các service providers mặc định của Laravel
     App\Providers\ViewServiceProvider::class,
-
+    App\Providers\CategoryServiceProvider::class
 ];

@@ -4,9 +4,9 @@
 					<div class="row justify-content-between">
 						<div class="col-lg-5">
 							<div class="intro-excerpt">
-								<h1>Services</h1>
-								<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-								<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
+								<h1>Dịch vụ</h1>
+								{{-- <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p> --}}
+								<p><a href="" class="btn btn-secondary me-2">Của hàng</a><a href="#" class="btn btn-white-outline">Khám phá</a></p>
 							</div>
 						</div>
 						<div class="col-lg-7">
@@ -19,13 +19,13 @@
 			</div>
 		<!-- End Hero Section -->
 
-		
 
-		<!-- Start Why Choose Us Section -->
+
+		{{-- <!-- Start Why Choose Us Section -->
 		<div class="why-choose-section">
 			<div class="container">
-				
-				
+
+
 				<div class="row my-5">
 					<div class="col-6 col-md-6 col-lg-3 mb-4">
 						<div class="feature">
@@ -108,7 +108,7 @@
 					</div>
 
 				</div>
-			
+
 			</div>
 		</div>
 		<!-- End Why Choose Us Section -->
@@ -123,7 +123,7 @@
 						<h2 class="mb-4 section-title">Crafted with excellent material.</h2>
 						<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. </p>
 						<p><a href="#" class="btn">Explore</a></p>
-					</div> 
+					</div>
 					<!-- End Column 1 -->
 
 					<!-- Start Column 2 -->
@@ -137,7 +137,7 @@
 								<img src="images/cross.svg" class="img-fluid">
 							</span>
 						</a>
-					</div> 
+					</div>
 					<!-- End Column 2 -->
 
 					<!-- Start Column 3 -->
@@ -173,8 +173,6 @@
 		</div>
 		<!-- End Product Section -->
 
-		
-
 		<!-- Start Testimonial Slider -->
 		<div class="testimonial-section before-footer-section">
 			<div class="container">
@@ -194,7 +192,7 @@
 							</div>
 
 							<div class="testimonial-slider">
-								
+
 								<div class="item">
 									<div class="row justify-content-center">
 										<div class="col-lg-8 mx-auto">
@@ -215,7 +213,7 @@
 
 										</div>
 									</div>
-								</div> 
+								</div>
 								<!-- END item -->
 
 								<div class="item">
@@ -238,7 +236,7 @@
 
 										</div>
 									</div>
-								</div> 
+								</div>
 								<!-- END item -->
 
 								<div class="item">
@@ -261,7 +259,7 @@
 
 										</div>
 									</div>
-								</div> 
+								</div>
 								<!-- END item -->
 
 							</div>
@@ -271,4 +269,4 @@
 				</div>
 			</div>
 		</div>
-		<!-- End Testimonial Slider -->
+		<!-- End Testimonial Slider --> --}}

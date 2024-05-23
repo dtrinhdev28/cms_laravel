@@ -24,7 +24,7 @@
                   <form action="" method="get">
                       <select class="form-select" aria-label="Default select example">
                           @foreach ($getAllCategory as $item)
-                              <option value="{{ $item->id }}">{{ $item->name_category }}</option>
+                              <option value="?{{ $item->id }}">{{ $item->name_category }}</option>
                           @endforeach
                       </select>
                       <button type="submit" class="btn btn-primary w-100 mt-4">Tìm kiếm</button>
@@ -34,7 +34,7 @@
               <div class="col-10 col-md-10 col-lg-10 ">
                   <div class="row">
                       @foreach ($getAllProduct as $item)
-                          <div class="col-12 col-md-4 col-lg-3 mb-5">
+                          <div class="col-12 col-md-4 col-lg-2 mb-5">
                               <a class="product-item" href="detail/{{ $item->slug }}">
                                   <img src="/client/images/productsImage/{{ $item->image }}"
                                       onerror="this.src='/error/404.gif'" class="img-fluid product-thumbnail">
@@ -59,7 +59,7 @@
                       {{ $getAllProduct->links('vendor.pagination.bootstrap-5') }}
                   </div>
 
-                  @if($user) 
+                  @if($user)
                   <h4 class="mt-5 mb-4 text-black">Sản phẩm đã xem</h4>
                   <div class="row">
                       @foreach ($viewers as $item)

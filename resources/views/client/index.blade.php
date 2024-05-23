@@ -1,142 +1,136 @@
-    <!-- Start Hero Section -->
-    <div class="hero">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-5">
-                    <div class="intro-excerpt">
-                        <h1>Modern Interior <span clsas="d-block">Design Studio</span></h1>
-                        <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                            vulputate velit imperdiet dolor tempor tristique.</p>
-                        <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
-                                class="btn btn-white-outline">Explore</a></p>
-                    </div>
+<!-- Start Hero Section -->
+<div class="hero">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-5">
+                <div class="intro-excerpt">
+                    <h1>Xiaomi Ultra <span clsas="d-block">Smart phone</span></h1>
+                    <p class="mb-4">Trả góp 0% cho mọi đơn hàng</p>
+                    <p><a href="" class="btn btn-secondary me-2">Sản phẩm</a><a href="#"
+                            class="btn btn-white-outline">Khám phá</a></p>
                 </div>
-                <div class="col-lg-7">
-                    <div class="hero-img-wrap">
-                        <img src="/client/images/couch.png" class="img-fluid">
-                    </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-img-wrap">
+                    <img src="/client/banner/Thiết kế chưa có tên.png" class="img-fluid">
                 </div>
             </div>
         </div>
     </div>
-    <!-- End Hero Section -->
+</div>
+<!-- End Hero Section -->
 
-    <!-- Start Product Section -->
-    <div class="product-section">
-        <div class="container">
-            <div class="row">
+<!-- Start Product Section -->
+<div class="product-section">
+    <div class="container">
+        <div class="row">
 
-                <!-- Start Column 1 -->
-                <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-                    <h2 class="mb-4 section-title">Crafted with excellent material.</h2>
-                    <p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                        vulputate velit imperdiet dolor tempor tristique. </p>
-                    <p><a href="shop.html" class="btn">Explore</a></p>
-                </div>
-                <!-- End Column 1 -->
-
-                @foreach ($products as $item)
-                    <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        <a class="product-item" href="detail/{{ $item->slug }}">
-                            <img src="/client/images/productsImage/{{ $item->image }}" onerror="this.src='/error/404.gif'"
-                                class="img-fluid product-thumbnail">
-                            <h3 class="product-title">{{ $item->name }}</h3>
-
-                            @if ($item->price_promotion === null || $item->price_promotion === 0)
-                                <strong class="product-price">{{ number_format($item->price, 0, '.', '.') }}
-                                    VNĐ</strong>
-                            @else
-                                <del class="product-price">{{ number_format($item->price, 0, '.', '.') }} VNĐ</del>
-                                <p class="fw-bold text-danger product-price">
-                                    {{ number_format($item->price_promotion, 0, '.', '.') }} VNĐ</p>
-                            @endif
-
-                            <span class="icon-cross">
-                                <img src="/client/images/cross.svg" class="img-fluid">
-                            </span>
-                        </a>
-                    </div>
-                @endforeach
-
+            <!-- Start Column 1 -->
+            <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+                <h2 class="mb-4 section-title">Được chế tạo bằng kiệt tác huyền thoại.</h2>
+                <p class="mb-4">Deal giá sốc unlock điện thoại xịn. </p>
+                <p><a href="shop.html" class="btn">Khám phá</a></p>
             </div>
+            <!-- End Column 1 -->
+
+            @foreach ($products as $item)
+                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                    <a class="product-item" href="detail/{{ $item->slug }}">
+                        <img src="/client/images/productsImage/{{ $item->image }}" onerror="this.src='/error/404.gif'"
+                            class="img-fluid product-thumbnail">
+                        <h3 class="product-title">{{ $item->name }}</h3>
+
+                        @if ($item->price_promotion === null || $item->price_promotion === 0)
+                            <strong class="product-price">{{ number_format($item->price, 0, '.', '.') }}
+                                VNĐ</strong>
+                        @else
+                            <del class="product-price">{{ number_format($item->price, 0, '.', '.') }} VNĐ</del>
+                            <p class="fw-bold text-danger product-price">
+                                {{ number_format($item->price_promotion, 0, '.', '.') }} VNĐ</p>
+                        @endif
+
+                        <span class="icon-cross">
+                            <img src="/client/images/cross.svg" class="img-fluid">
+                        </span>
+                    </a>
+                </div>
+            @endforeach
+
         </div>
     </div>
-    <!-- End Product Section -->
+</div>
+<!-- End Product Section -->
 
-    <!-- Start Why Choose Us Section -->
-    <div class="why-choose-section">
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-lg-6">
-                    <h2 class="section-title">Why Choose Us</h2>
-                    <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit
-                        imperdiet dolor tempor tristique.</p>
+<!-- Start Why Choose Us Section -->
+<div class="why-choose-section">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-lg-6">
+                <h2 class="section-title">Tại sao chọn chúng tôi?</h2>
+                <p>Furni là đơn vị cung cấp thiết bị điện tử, smart phone hiện đại với giá cả phải chăng. Với tôn chỉ
+                    hoạt động "Xây dựng chất lượng".</p>
 
-                    <div class="row my-5">
-                        <div class="col-6 col-md-6">
-                            <div class="feature">
-                                <div class="icon">
-                                    <img src="/client/images/truck.svg" alt="Image" class="imf-fluid">
-                                </div>
-                                <h3>Fast &amp; Free Shipping</h3>
-                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                    vulputate.
-                                </p>
+                <div class="row my-5">
+                    <div class="col-6 col-md-6">
+                        <div class="feature">
+                            <div class="icon">
+                                <img src="/client/images/truck.svg" alt="Image" class="imf-fluid">
                             </div>
+                            <h3>Vận chuyển nhanh & miễn phí</h3>
+                            <p>Giúp bạn giao hàng đến người nhận nhanh hơn 6 tiếng so với các đơn vị vận chuyển khác..
+                            </p>
                         </div>
-
-                        <div class="col-6 col-md-6">
-                            <div class="feature">
-                                <div class="icon">
-                                    <img src="/client/images/bag.svg" alt="Image" class="imf-fluid">
-                                </div>
-                                <h3>Easy to Shop</h3>
-                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                    vulputate.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-md-6">
-                            <div class="feature">
-                                <div class="icon">
-                                    <img src="/client/images/support.svg" alt="Image" class="imf-fluid">
-                                </div>
-                                <h3>24/7 Support</h3>
-                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                    vulputate.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-md-6">
-                            <div class="feature">
-                                <div class="icon">
-                                    <img src="/client/images/return.svg" alt="Image" class="imf-fluid">
-                                </div>
-                                <h3>Hassle Free Returns</h3>
-                                <p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                    vulputate.
-                                </p>
-                            </div>
-                        </div>
-
                     </div>
-                </div>
 
-                <div class="col-lg-5">
-                    <div class="img-wrap">
-                        <img src="/client/images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+                    <div class="col-6 col-md-6">
+                        <div class="feature">
+                            <div class="icon">
+                                <img src="/client/images/bag.svg" alt="Image" class="imf-fluid">
+                            </div>
+                            <h3>Dễ dàng mua sắm</h3>
+                            <p>Dễ dàng thuận lợi mua hàng. Cửa hàng có mặt nhiều nơi.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
+                    <div class="col-6 col-md-6">
+                        <div class="feature">
+                            <div class="icon">
+                                <img src="/client/images/support.svg" alt="Image" class="imf-fluid">
+                            </div>
+                            <h3>Hỗ trợ 24/7</h3>
+                            <p>Dịch vụ 24 7 mang lại nhiều lợi ích cho cả doanh nghiệp và khách hàng.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-6">
+                        <div class="feature">
+                            <div class="icon">
+                                <img src="/client/images/return.svg" alt="Image" class="imf-fluid">
+                            </div>
+                            <h3>Dễ dàng đổi trả</h3>
+                            <p>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+
+            <div class="col-lg-5">
+                <div class="img-wrap">
+                    <img src="/client/images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+                </div>
+            </div>
+
         </div>
     </div>
-    <!-- End Why Choose Us Section -->
+</div>
+<!-- End Why Choose Us Section -->
 
-    <!-- Start We Help Section -->
-    <div class="we-help-section">
+<!-- Start We Help Section -->
+{{-- <div class="we-help-section">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-7 mb-5 mb-lg-0">
@@ -147,12 +141,8 @@
                     </div>
                 </div>
                 <div class="col-lg-5 ps-lg-5">
-                    <h2 class="section-title mb-4">We Help You Make Modern Interior Design</h2>
-                    <p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada.
-                        Nullam
-                        ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque
-                        habitant
-                        morbi tristique senectus et netus et malesuada</p>
+                    <h2 class="section-title mb-4">Chúng tôi giúp bạn lựa chọn điện thoại dễ dàng</h2>
+                    <p></p>
 
                     <ul class="list-unstyled custom-list my-4">
                         <li>Donec vitae odio quis nisl dapibus malesuada</li>
@@ -333,47 +323,47 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- End Testimonial Slider -->
+    </div> --}}
+<!-- End Testimonial Slider -->
 
 
-    <style>
-        .__custom_image {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
-    </style>
+<style>
+    .__custom_image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
+</style>
 
-    <!-- Start Blog Section -->
-    <div class="blog-section">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-md-6">
-                    <h2 class="section-title">Recent Blog</h2>
-                </div>
-                <div class="col-md-6 text-start text-md-end">
-                    <a href="{{ route('blogs') }}" class="more">View All Posts</a>
-                </div>
+<!-- Start Blog Section -->
+<div class="blog-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-6">
+                <h2 class="section-title">Tin tức</h2>
             </div>
+            <div class="col-md-6 text-start text-md-end">
+                <a href="{{ route('blogs') }}" class="more">Xem tất cả</a>
+            </div>
+        </div>
 
-            <div class="row">
-                @foreach ($blogs as $item)
-                    <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
-                        <div class="post-entry">
-                            <a href="blog/{{ $item->id }}" class="post-thumbnail"><img class="__custom_image"
-                                    src="/client/images/{{ $item->urlHinh }}" alt="Image" class="img-fluid"></a>
-                            <div class="post-content-entry">
-                                <h3><a href="#">{{ $item->tieuDe }}</a></h3>
-                                <div class="meta">
-                                    <span>{{ date('Y-m-d', strtotime($item->ngayDang)) }}</a></span>
-                                </div>
+        <div class="row">
+            @foreach ($blogs as $item)
+                <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
+                    <div class="post-entry">
+                        <a href="blog/{{ $item->id }}" class="post-thumbnail"><img class="__custom_image"
+                                src="/client/images/{{ $item->urlHinh }}" alt="Image" class="img-fluid"></a>
+                        <div class="post-content-entry">
+                            <h3><a href="#">{{ $item->tieuDe }}</a></h3>
+                            <div class="meta">
+                                <span>{{ date('Y-m-d', strtotime($item->ngayDang)) }}</a></span>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                </div>
+            @endforeach
 
-            </div>
         </div>
     </div>
-    <!-- End Blog Section -->
+</div>
+<!-- End Blog Section -->
