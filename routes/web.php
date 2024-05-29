@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CategoryControler;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\SendemailController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\client\ProductController;
 
 // admin controller
 use App\Http\Controllers\admin\UserController as AdminUserController;
+use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 
 
 
@@ -21,7 +23,19 @@ Route::get('/services', [PageController::class, 'services'])->name('services');
 Route::get('/shop', [PageController::class, 'shop'])->name('shop');
 Route::get('/blogs', [PageController::class, 'blogs'])->name('blogs');
 Route::get('/cart', [PageController::class, 'cart'])->name('cart');
+
+// blogs start
 Route::get('/blog/{id}', [PageController::class, 'blogDetail'])->name('blog');
+Route::get('/blog/themtin/tin', [BlogController::class, 'themtin'])->name('themtin');
+
+Route::post('/blogtaotin', [BlogController::class, 'storeTin'])->name('taotin');
+Route::get('/blog/delete/{id}', [BlogController::class, 'deleteBlog'])->name('deleteBlog');
+Route::get('/blog/deletefroce/{id}', [BlogController::class, 'deleteforce'])->name('deleteBlog');
+Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit');
+Route::post('/blog/edit', [BlogController::class, 'updateBlog'])->name('update.Blog');
+Route::get('/blog/trash/all', [BlogController::class, 'trash'])->name('trash.Blog');
+
+// blogs end
 
 // sản phẩm theo danh mục
 Route::get('danhmuc/{id}', [CategoryControler::class, 'index'])->name('danhmuc');
@@ -39,28 +53,14 @@ Route::get('/logout', function(Request $request) {
     return redirect('/');
 })->name('logout');
 
-// // forgot password
-// Route::get('/forgot-password', function () {
-//     return view('auth.forgot-password');
-// })->middleware('guest')->name('password.request');
-
-
-// Route::post('/forgot-password', function (Request $request) {
-//     $request->validate(['email' => 'required|email']);
-
-//     $status = Password::sendResetLink(
-//         $request->only('email')
-//     );
-
-//     return $status === Password::RESET_LINK_SENT
-//                 ? back()->with(['status' => __($status)])
-//                 : back()->withErrors(['email' => __($status)]);
-// })->middleware('guest')->name('password.email');
 
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::post('/signup', [UserController::class, 'signup'])->name('signup');
 // product
+
 Route::get('/detail/{slug}', [ProductController::class, 'detail'])->name('detail');
+
+
 
 // cart
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
@@ -69,10 +69,19 @@ Route::post('/cart/delete', [CartController::class, 'destroy'])->name('delete.ca
 
 // ADMIN
 Route::prefix('admin')->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+
+    // user
     Route::get('/users', [AdminUserController::class, 'index'])->name('getAllUsers')->middleware('auth');
     Route::get('/user/create', [AdminUserController::class, 'create'])->name('createUser');
     Route::post('/user/create', [AdminUserController::class, 'store'])->name('userStore');
-    // Route::post('/delete', [AdminUserController::class, 'index'])->name('get_all_users');
+    Route::post('/user/delete', [AdminUserController::class, 'deleteAt'])->name('delete.user');
+
+    Route::get('/user/trash', [AdminUserController::class, 'trash'])->name('trash.user');
+    Route::post('/user/restore', [AdminUserController::class, 'restoreUser'])->name('restore.user');
+    // delete forceDelete
+    Route::post('/user/forceDelete', [AdminUserController::class, 'forceDeleteUser'])->name('forceDelete.user');
     // Route::delete('/destroy', [AdminUserController::class, 'index'])->name('get_all_users');
 });
 

@@ -32,42 +32,32 @@
     <!-- Start Blog Section -->
     <div class="blog-section">
         <div class="container">
+            <div class="d-flex justify-content-between">
+                <a href="{{route('themtin')}}" style="width:180px" class="mb-4 btn btn-primary">Thêm tin mới</a>
+                <a href="{{route('trash.Blog')}}" style="width:180px" class="mb-4 btn btn-danger">Xem thùng rác</a>
+            </div>
             <div class="row">
                 @foreach ($blogs as $item)
                     <div class="col-12 col-sm-6 col-md-4 mb-5">
                         <div class="post-entry">
-                            <a href="{{ route('blog', ['id' => $item->id]) }}" class="post-thumbnail"><img src="client/images/{{ $item->urlHinh }}" alt="Image"
+                            <a href="{{ route('blog', ['id' => $item->id]) }}" class="post-thumbnail"><img src="/storage/images/{{ $item->urlHinh }}" alt="Image"
                                     class="img-fluid __custom_image"></a>
                             <div class="post-content-entry">
                                 <h3><a href="#">{{ $item->tieuDe }}</a></h3>
                                 <div class="meta">
-                                    <span>by <a href="#">Kristin Watson</a></span> <span>on <a
-                                            href="#">{{ $item->ngayDang }}</a></span>
+                                    <span>by <a href="#">Đăng Trình</a></span> <span>on <a
+                                            href="#">{{ date('d-m-Y', strtotime($item->ngayDang)) }}</a></span>
                                     <span>Views: {{ $item->xem }}</span>
                                 </div>
                             </div>
                         </div>
+                        <a href="blog/delete/{{$item->id}}" class="btn btn-info">Xóa</a>
+                        <a href="blog/deletefroce/{{$item->id}}" onclick="confirm('Hành động của bạn sẻ xóa vĩnh viễn bài viết?')" class="btn btn-danger">Xóa vĩnh viễn</a>
+                        <a href="blog/edit/{{$item->id}}" class="btn btn-warning">Edit</a>
                     </div>
                 @endforeach
                 {{ $blogs->links('vendor.pagination.bootstrap-5') }}
 
-                @foreach ($blogxem as $item)
-                    <div class="col-12 col-sm-6 col-md-4 mb-5">
-                        <div class="post-entry">
-                            <a href="{{ route('blog', ['id' => $item->id]) }}" class="post-thumbnail"><img src="client/images/{{ $item->urlHinh }}" alt="Image"
-                                    class="img-fluid __custom_image"></a>
-                            <div class="post-content-entry">
-                                <h3><a href="#">{{ $item->tieuDe }}</a></h3>
-                                <div class="meta">
-                                    <span>by <a href="#">Kristin Watson</a></span> <span>on <a
-                                            href="#">{{ $item->ngayDang }}</a></span>
-                                    <span>Views: {{ $item->xem }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-                {{ $blogs->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
     </div>

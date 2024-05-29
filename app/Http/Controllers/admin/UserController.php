@@ -36,7 +36,7 @@ class UserController extends Controller
             'subtitle' => 'User',
             'title_heading' => 'Create user'
         ];
-        
+
         $template = 'admin.createUser';
 
         return view('admin.layouts.master', compact(
@@ -63,6 +63,45 @@ class UserController extends Controller
         if($results) {
             return Redirect::route('createUser')->with('alerts', ['success' => 'Create A User Successfully']);
         }
+    }
 
+    public function deleteAt(Request $requets) {
+        $id = $requets->input('idUser');
+
+        $results = UsersModel::findOrFail($id)->delete();
+
+        if(!$results) {
+            return redirect()->route('getAllUsers')->with('alerts', ['danger' => 'Deleted user failed']);
+        }
+        return redirect()->route('getAllUsers')->with('alerts', ['success' => 'Xóa user thành công']);
+    }
+
+    public function trash() {
+        $getUserTrash = UsersModel::onlyTrashed()->get();
+
+        $template = 'admin.usertrash';
+        return view('admin.layouts.master', compact([
+            'getUserTrash',
+            'template'
+        ]));
+    }
+
+    public function restoreUser(Request $request) {
+        $idUser = $request->input('idUser');
+        $results = UsersModel::withTrashed()->where('id', $idUser)->restore();
+        if(!$results) {
+            return redirect()->route('getAllUsers')->with('alerts', ['danger' => 'Khôi phục user thất bại']);
+        }
+        return redirect()->route('getAllUsers')->with('alerts', ['success' => 'Khôi phục user thành công']);
+    }
+
+    public function forceDeleteUser(Request $request) {
+        $idUser = $request->input('idUser');
+        $results = UsersModel::withTrashed()->where('id', $idUser)->forceDelete();
+
+        if(!$results) {
+            return redirect()->route('getAllUsers')->with('alerts', ['danger' => 'XÓa user thất bại']);
+        }
+        return redirect()->route('getAllUsers')->with('alerts', ['success' => 'Xóa user thành công']);
     }
 }

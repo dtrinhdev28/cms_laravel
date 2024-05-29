@@ -66,10 +66,11 @@ class PageController extends Controller
     }
     public function shop()
     {
-        $config = ['title' => 'Shop'];
-        $template = 'client.shop';
 
-        $getAllProduct = ProductsModel::paginate(12);
+
+        $keyword = (isset($_GET['keyword'])) ? $_GET['keyword'] : '';
+
+        $getAllProduct = ProductsModel::where('name', 'like', '%'.$keyword.'%')->inRandomOrder()->paginate(12);
         $getAllCategory = CategoryModel::get();
 
         $viewers = [''];
@@ -82,6 +83,8 @@ class PageController extends Controller
             ->where('products.hidden', '=', 1)
             ->get();
         }
+        $config = ['title' => (isset($_GET['keyword']) && $_GET['keyword'] !== '' ) ? 'Tìm kiếm sản phẩm ' . $_GET['keyword'] : 'Shop'];
+        $template = 'client.shop';
 
         return view('client.layouts.master', compact(
             'config',
@@ -92,31 +95,29 @@ class PageController extends Controller
         )
         );
     }
-    
+
     public function blogs()
     {
         $config = ['title' => 'Blogs'];
         $template = 'client.blog';
 
-        $blogs = BlogModel::orderBy('xem','desc')->paginate(9);
-        $blogxem = BlogModel::orderBy('ngayDang','desc')->paginate(9);
-        
+        $blogs = BlogModel::orderBy('id','desc')->paginate(9);
+
         return view('client.layouts.master', compact(
             'config',
             'template',
             'blogs',
-            'blogxem'
         )
         );
     }
     public function blogDetail($id = 0)
     {
-        
+
         $blog = BlogModel::findOrFail($id);
         $config = ['title' => $blog->tieuDe];
-     
+
         $template = 'client.blogDetail';
-        
+
         // view posr new
         $latest_post = BlogModel::orderBy('id', 'desc')->take(4)->get();
 
@@ -134,5 +135,5 @@ class PageController extends Controller
         )
         );
     }
-    
+
 }

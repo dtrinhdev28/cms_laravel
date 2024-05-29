@@ -1,6 +1,5 @@
 <div class="py-3 d-flex align-items-center justify-content-between">
-    <a href="{{ route('createUser') }}" class="btn btn-primary">Create user</a>
-    <a href="{{ route('trash.user') }}" class="btn btn-danger ">Xem thùng rác <i class="fa-solid fa-trash"></i></a>
+    <a href="{{ route('createUser') }}" class="btn btn-primary">Khôi phục</a>
 </div>
 
 @if (session('alerts'))
@@ -26,7 +25,7 @@
     </thead>
     <tbody>
 
-        @foreach ($getAllUser as $item)
+        @foreach ($getUserTrash as $item)
             <tr>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->email }}</td>
@@ -35,28 +34,34 @@
                 <td>
                     @if ($item->role === '1')
                         <span class="badge text-bg-secondary">Client</span>
-                        @elseif($item->role === '0')
+                    @elseif($item->role === '0')
                         <span class="badge text-light text-bg-info">Admin</span>
                     @endif
                 </td>
 
                 <td>
-                    <a href="" class="btn btn-warning text-light">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <form action="{{ route('delete.user') }}" method="post">
-                        @csrf
-                        <input type="hidden" value="{{ $item->id }}" name="idUser">
-                        <button type="submit" class="btn btn-danger text-light">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </form>
+                    <div class="d-flex gap-2">
+                        <form action="{{ route('restore.user') }}" method="post">
+                            @csrf
+                            <input type="hidden" value="{{ $item->id }}" name="idUser">
+                            <button type="submit" class="btn btn-warning text-light">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </form>
+                        <form action="{{ route('forceDelete.user') }}" method="post">
+                            @csrf
+                            <input type="hidden" value="{{ $item->id }}" name="idUser">
+                            <button type="submit" class="btn btn-danger text-light">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
-{{ $getAllUser->links('vendor.pagination.bootstrap-5') }}
+{{-- {{ $getAllUser->links('vendor.pagination.bootstrap-5') }} --}}
 
 <script>
     function confirmDelete(id) {
