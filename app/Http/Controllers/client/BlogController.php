@@ -111,6 +111,29 @@ class BlogController extends Controller
     }
 
     public function trash() {
-        echo 1;
+        $config = [
+            'title' => "Thêm tin tức",
+        ];
+        $template = "client.tin.trashblog";
+
+        $loaitin = loaitin::all();
+        $blogs = BlogModel::onlyTrashed()->paginate(6);
+
+        return view('client.layouts.master', compact(
+            [
+                'config',
+                'template',
+                'loaitin',
+                'blogs'
+            ]
+        ));
+    }
+
+    public function restoreBlog($id) {
+        $results = BlogModel::withTrashed()->where('id', $id)->restore();
+        if(!$results) {
+            return redirect()->route('blogs')->with('alerts', ['danger' => 'Khôi phục bài viết thất bại']);
+        }
+        return redirect()->route('blogs')->with('alerts', ['success' => 'Khôi phục bài viết thành công']);
     }
  }

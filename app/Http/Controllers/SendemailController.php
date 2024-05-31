@@ -9,7 +9,7 @@ class SendemailController extends Controller
 {
     public function index() {
 
-        Mail::to('dtrinhit84@gmail.com')->send(new DemoEmail());
+        Mail::to('dtrinhit84@gmail.com')->send();
 
         return 'Mail sent!';
     }

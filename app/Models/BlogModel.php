@@ -14,7 +14,6 @@ class BlogModel extends Model
     protected $primaryKey = 'id';
     protected $table = 'tin';
 
-
     protected $fillable = [
         'tieuDe',
         'tomTat',

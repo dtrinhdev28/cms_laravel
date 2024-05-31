@@ -28,13 +28,14 @@ Route::get('/cart', [PageController::class, 'cart'])->name('cart');
 Route::get('/blog/{id}', [PageController::class, 'blogDetail'])->name('blog');
 Route::get('/blog/themtin/tin', [BlogController::class, 'themtin'])->name('themtin');
 
+// blog
 Route::post('/blogtaotin', [BlogController::class, 'storeTin'])->name('taotin');
 Route::get('/blog/delete/{id}', [BlogController::class, 'deleteBlog'])->name('deleteBlog');
 Route::get('/blog/deletefroce/{id}', [BlogController::class, 'deleteforce'])->name('deleteBlog');
 Route::get('/blog/edit/{id}', [BlogController::class, 'edit'])->name('edit');
 Route::post('/blog/edit', [BlogController::class, 'updateBlog'])->name('update.Blog');
 Route::get('/blog/trash/all', [BlogController::class, 'trash'])->name('trash.Blog');
-
+Route::get('/khoiphuc/{id}', [BlogController::class, 'restoreBlog'])->name('khoiphuc');
 // blogs end
 
 // sản phẩm theo danh mục

@@ -19,7 +19,7 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="hero-img-wrap">
-                        <img src="client/images/couch.png" class="img-fluid">
+                        {{-- <img src="client/images/couch.png" class="img-fluid"> --}}
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
         <div class="container">
             <div class="d-flex justify-content-between">
                 <a href="{{route('themtin')}}" style="width:180px" class="mb-4 btn btn-primary">Thêm tin mới</a>
-                <a href="{{route('trash.Blog')}}" style="width:180px" class="mb-4 btn btn-danger">Xem thùng rác</a>
+                <a href="{{route('trash.Blog')}}" class="mb-4 btn btn-danger">Xem thùng rác</a>
             </div>
             <div class="row">
                 @foreach ($blogs as $item)
@@ -53,7 +53,7 @@
                         </div>
                         <a href="blog/delete/{{$item->id}}" class="btn btn-info">Xóa</a>
                         <a href="blog/deletefroce/{{$item->id}}" onclick="confirm('Hành động của bạn sẻ xóa vĩnh viễn bài viết?')" class="btn btn-danger">Xóa vĩnh viễn</a>
-                        <a href="blog/edit/{{$item->id}}" class="btn btn-warning">Edit</a>
+                        <a href="{{route('edit', $item->id)}}" class="btn btn-warning">Edit</a>
                     </div>
                 @endforeach
                 {{ $blogs->links('vendor.pagination.bootstrap-5') }}
