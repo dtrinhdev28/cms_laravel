@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\client\UserController;
 use App\Http\Controllers\client\PageController;
 use App\Http\Controllers\client\ProductController;
+use Illuminate\Http\Request;
 
 // admin controller
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\admin\CategoryController as AdminCategoryController;
 
 
 
@@ -78,12 +80,23 @@ Route::prefix('admin')->group(function () {
     Route::get('/user/create', [AdminUserController::class, 'create'])->name('createUser');
     Route::post('/user/create', [AdminUserController::class, 'store'])->name('userStore');
     Route::post('/user/delete', [AdminUserController::class, 'deleteAt'])->name('delete.user');
-
     Route::get('/user/trash', [AdminUserController::class, 'trash'])->name('trash.user');
     Route::post('/user/restore', [AdminUserController::class, 'restoreUser'])->name('restore.user');
     // delete forceDelete
     Route::post('/user/forceDelete', [AdminUserController::class, 'forceDeleteUser'])->name('forceDelete.user');
-    // Route::delete('/destroy', [AdminUserController::class, 'index'])->name('get_all_users');
+    
+    // Category
+    Route::get('/categorys', [AdminCategoryController::class, 'index'])->name('getAllcategory')->middleware('auth');
+    Route::get('/category/create', [AdminCategoryController::class, 'create'])->name('create.Category');
+    Route::post('/category/create', [AdminCategoryController::class, 'store'])->name('Store.Category');
+    Route::get('/category/edit/{id}', [AdminCategoryController::class, 'edit'])->name('edit.Category');
+    Route::post('/category/delete', [AdminCategoryController::class, 'deleteAt'])->name('delete.Category');
+    Route::get('/category/trash', [AdminCategoryController::class, 'trash'])->name('trash.Category');
+    Route::post('/category/restore', [AdminCategoryController::class, 'restore'])->name('restore.Category');
+    // delete forceDelete
+    Route::post('/category/forceDelete', [AdminCategoryController::class, 'forceDelete'])->name('forceDelete.Category');
+
+
 });
 
 // test email

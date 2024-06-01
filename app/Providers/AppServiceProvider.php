@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $category = CategoryModel::get();
+        $category = CategoryModel::where('hidden', '1')->orderBy('order', 'desc')->get();
         View::share('category', $category);
     }
 }

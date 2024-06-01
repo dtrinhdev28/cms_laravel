@@ -34,6 +34,8 @@
 
                       <button type="submit" class="btn btn-primary w-100 mt-4">Tìm kiếm</button>
                   </form>
+
+                  <img style="object-fit:cover" class="w-100 mt-5" src="/client/banner/bang-hieu-dien-thoai-3.jpg" alt="">
               </div>
 
               <div class="col-10 col-md-10 col-lg-10 ">
