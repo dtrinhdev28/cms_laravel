@@ -1,10 +1,24 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
+
 use App\Http\Controllers\client\BlogController;
 use App\Http\Controllers\client\CategoryControler;
 use App\Http\Controllers\client\CartController;
 use App\Http\Controllers\SendemailController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\client\UserController;
 use App\Http\Controllers\client\PageController;
 use App\Http\Controllers\client\ProductController;
@@ -14,8 +28,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\admin\UserController as AdminUserController;
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\CategoryController as AdminCategoryController;
-
-
 
 // pagehome
 Route::get('/', [PageController::class, 'index'])->name('pagehome');
@@ -73,7 +85,7 @@ Route::post('/cart/delete', [CartController::class, 'destroy'])->name('delete.ca
 // ADMIN
 Route::prefix('admin')->group(function () {
     // Dashboard
-    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard.admin');
 
     // user
     Route::get('/users', [AdminUserController::class, 'index'])->name('getAllUsers')->middleware('auth');
