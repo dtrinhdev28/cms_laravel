@@ -26,7 +26,7 @@
                 <label for="hinhanh" class="form-label" style="width:80px">Hình ảnh</label>
                 <label for="hinhanh"><i class="btn btn-primary fa-solid fa-upload"></i></label>
             </div>
-            
+
             <input type="file" name="file" class="form-control d-none" id="hinhanh">
 
             @if ($blog['urlHinh'] !== '')
@@ -86,5 +86,4 @@
             imageBlog.alt = 'No image selected';
         }
     });
-</script>
 </script>

@@ -27,7 +27,7 @@ class UserController extends Controller
     public function store(Request $request) {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'min:8'],
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -58,14 +58,16 @@ class UserController extends Controller
         $results = UsersModel::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password')),
+            'password' => Hash::make($request->password),
+            'nghenghiep' => $request->nghenghiep ?? '',
+            'address' => $request->diachi ?? ''
         ]);
 
         if ($results) {
             $email = $request->input('email');
             // Send email
-            Mail::raw('', function ($message) use ($email) {
-                $message->to($email)->subject('Test Mail');
+            Mail::raw('Chúc mừng bạn đăng ký thành công tài khoản', function ($message) use ($email) {
+                $message->to($email)->subject('Đăng ký tài khoản thành công');
             });
             return redirect::route('login')->with('alerts', ['success' => 'Đăng ký tài khoản thành công!!']);
 
@@ -111,11 +113,11 @@ class UserController extends Controller
         ]);
 
         // check password
-        if(!Hash::check($requets->currentpassword, \Auth::user()->password )) {
+        if(!Hash::check($requets->currentpassword, Auth::user()->password )) {
             dd("Password not matching");
         };
 
-        UsersModel::whereId(\Auth::user()->id)->update([
+        UsersModel::whereId(Auth::user()->id)->update([
             'password' => Hash::make($requets->newpassword)
         ]);
     }

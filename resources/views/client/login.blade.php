@@ -1,16 +1,13 @@
-<section class="">
+@if (session('alerts'))
+    @foreach (session('alerts') as $type => $message)
+        <div class="alert alert-{{ $type }}">
+            {{ $message }}
+        </div>
+    @endforeach
+@endif
     <!-- Jumbotron -->
     <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
         <div class="container">
-
-            @if (session('alerts'))
-                @foreach (session('alerts') as $type => $message)
-                    <div class="alert alert-{{ $type }}">
-                        {{ $message }}
-                    </div>
-                @endforeach
-            @endif
-
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
                     <h1 class="my-5 display-3 fw-bold ls-tight">
@@ -53,27 +50,10 @@
                                 <button type="submit" class="btn btn-primary btn-block mb-4 w-100">
                                     Đăng nhập
                                 </button>
-
-                                <!-- Register buttons -->
-                                <div class="text-center">
-                                    <p>hoặc đăng nhập với</p>
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-google"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-twitter"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-link btn-floating mx-1">
-                                        <i class="fab fa-github"></i>
-                                    </button>
-                                </div>
                             </form>
+
+                            <a href="{{route('register')}}">Hoặc đăng ký tài khoản</a>
+
                         </div>
                     </div>
                 </div>
@@ -81,5 +61,3 @@
         </div>
     </div>
     <!-- Jumbotron -->
-</section>
-<!-- Section: Design Block -->

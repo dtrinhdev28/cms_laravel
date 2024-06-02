@@ -31,13 +31,13 @@ class AuthRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Fullname field is required',
+            'name.required' => 'Vui lòng nhập họ và tên',
 
-            'email.required' => 'Email field is required',
-            'email.unique' => 'Email is already exist',
+            'email.required' => 'Vui lòng nhập email',
+            'email.unique' => 'Email đã tồn tại',
 
-            'password.required' => 'Password field is required',
-            'password.min' => 'Password minlength 8 ',
+            'password.required' => 'Vui lòng nhập mật khẩu',
+            'password.min' => 'Mật khẩu tối thiểu 8 kí tự',
         ];
     }
 }

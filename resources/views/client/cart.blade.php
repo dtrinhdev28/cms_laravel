@@ -15,12 +15,12 @@
                   <table class="table">
                       <thead>
                           <tr>
-                              <th class="product-thumbnail">Image</th>
-                              <th class="product-name">Product</th>
-                              <th class="product-price">Price</th>
-                              <th class="product-quantity">Quantity</th>
-                              <th class="product-total">Total</th>
-                              <th class="product-remove">Remove</th>
+                              <th class="product-thumbnail">Hình ảnh</th>
+                              <th class="product-name">Sản phẩm</th>
+                              <th class="product-price">Giá</th>
+                              <th class="product-quantity">Số lượng</th>
+                              <th class="product-total">Tổng tiền</th>
+                              <th class="product-remove">Xóa</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -78,8 +78,8 @@
 
                       <form id="vourcher" action="">
                           <div class="col-md-12">
-                              <label class="text-black h4" for="coupon">Coupon</label>
-                              <p>Enter your coupon code if you have one.</p>
+                              <label class="text-black h4" for="coupon">Mã giảm giá</label>
+                              <p>Nhập mã phiếu giảm giá của bạn nếu bạn có.</p>
                           </div>
                           <div class="col-md-8 mb-3 mb-md-0">
                               <input type="text" name="coupon" class="form-control py-3" id="coupon"
@@ -87,7 +87,7 @@
                               <p id="messageVourcher"></p>
                           </div>
                           <div class="col-md-4">
-                              <button type="button" id="btnCoupon" class="btn btn-primary">Apply Coupon</button>
+                              <button type="button" id="btnCoupon" class="btn btn-primary">Chấp nhận</button>
                           </div>
                       </form>
 
@@ -98,12 +98,12 @@
                       <div class="col-md-7">
                           <div class="row">
                               <div class="col-md-12 text-right border-bottom mb-5">
-                                  <h3 class="text-black h4 text-uppercase">Cart Totals</h3>
+                                  <h3 class="text-black h4 text-uppercase">Tổng giỏ hàng</h3>
                               </div>
                           </div>
                           <div class="row mb-2">
                               <div class="col-md-6">
-                                  <span class="text-black">Subtotal</span>
+                                  <span class="text-black">Tổng phụ</span>
                               </div>
 
                               @php
@@ -121,7 +121,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <button class="btn btn-primary btn-lg mt-3 btn-block"
-                                      onclick="window.location='checkout'">Proceed To Checkout</button>
+                                      onclick="window.location='checkout'">Tiến hành thanh toán</button>
                               </div>
                           </div>
                       </div>

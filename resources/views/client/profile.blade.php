@@ -12,9 +12,15 @@
                                         alt="">
                                 </div>
                                 <h5 class="text-center mb-1">{{ $user->name }}</h5>
-                                <p class="text-center text-secondary mb-4">{{ $user->roles }}</p>
+                                <p class="text-center text-secondary mb-4">
+                                    @if ($user->roles == 0)
+                                        Admin
+                                    @else
+                                        Customer
+                                    @endif
+                                </p>
                                 <ul class="list-group list-group-flush mb-4">
-                                   
+
                                 </ul>
                                 {{-- <div class="d-grid m-0">
                                     <button class="btn btn-outline-primary" type="button">Follow</button>
@@ -45,7 +51,7 @@
                                     data-bs-target="#order-tab-pane" type="button" role="tab"
                                     aria-controls="order-tab-pane" aria-selected="false">Order</button>
                             </li>
-                            
+
                         </ul>
                         <div class="tab-content pt-4" id="profileTabContent">
                             {{-- Profile --}}
@@ -63,46 +69,19 @@
                                         <input type="text" class="form-control" id="email"
                                             value="{{ $user->email }}">
                                     </div>
-                                   
+
                                     <div class="col-12 col-md-6">
                                         <label for="address" class="form-label">Address</label>
                                         <input type="text" class="form-control" id="address"
                                             value="{{ $user->address }}">
                                     </div>
-                                    
+
                                     <div class="col-12 col-md-6">
                                         <label for="numberphone" class="form-label">Number phone</label>
                                         <input type="text" class="form-control" id="numberphone"
                                             value="{{ $user->numberphone }}">
                                     </div>
-                                    
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputYouTube" class="form-label"></label>
-                                        <input type="text" class="form-control" id="inputYouTube"
-                                            value="https://www.youtube.com/EthanLeo">
-                                    </div>
-                                    
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputYouTube" class="form-label">YouTube</label>
-                                        <input type="text" class="form-control" id="inputYouTube"
-                                            value="https://www.youtube.com/EthanLeo">
-                                    </div>
 
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputX" class="form-label">X</label>
-                                        <input type="text" class="form-control" id="inputX"
-                                            value="https://twitter.com/EthanLeo">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputFacebook" class="form-label">Facebook</label>
-                                        <input type="text" class="form-control" id="inputFacebook"
-                                            value="https://www.facebook.com/EthanLeo">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputLinkedIn" class="form-label">LinkedIn</label>
-                                        <input type="text" class="form-control" id="inputLinkedIn"
-                                            value="https://www.linkedin.com/EthanLeo">
-                                    </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary">Save Changes</button>
                                     </div>

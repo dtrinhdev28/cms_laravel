@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 
 class ProductController extends Controller
@@ -28,16 +29,16 @@ class ProductController extends Controller
         ->first();
 
         $id_product = $productBySlug->id_product;
-        
+
         $productByimage = ImageProductModel::select('image_products.image')
         ->where('id_product', $id_product )
         ->first();
-        
+
         $imageAray = [''];
         if($productByimage !== null) {
             $imageAray = json_decode($productByimage->image, true);
         }
-        
+
         // update views
         ProductsModel::
         where('id_product', $id_product)
@@ -50,13 +51,13 @@ class ProductController extends Controller
         $template = 'client.productDetail';
 
         // update viewer
-        if(\Auth::check()) {
-            $existsViewer = ViewersModel::where('id_user', '=', \Auth::user()->id)
+        if(Auth::check()) {
+            $existsViewer = ViewersModel::where('id_user', '=', Auth::user()->id)
             ->where('id_product', '=', $id_product)->first();
 
             if(!$existsViewer) {
                 ViewersModel::create([
-                    "id_user" => \Auth::user()->id,
+                    "id_user" => Auth::user()->id,
                     "id_product" => $id_product,
                 ]);
             }
@@ -77,7 +78,7 @@ class ProductController extends Controller
     public function addToCart(Request $request)
     {
         $payload = $request->all();
-        $id_user = \Auth::user()->id;
+        $id_user = Auth::user()->id;
 
         $existsProduct =
             CartModel::
