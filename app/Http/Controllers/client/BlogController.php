@@ -35,7 +35,7 @@ class BlogController extends Controller
         if ($request->file('file')) {
             $file = $request->file('file');
             $filename = $file->getClientOriginalName();
-            $file->storeAs('', $filename, 'images');
+            $file->storeAs('', $filename, 'blog');
 
             $result = BlogModel::create([
                 'tieuDe' => $request->input('tieuDe'),

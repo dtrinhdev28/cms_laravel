@@ -1,7 +1,7 @@
 <div class="py-3 d-flex align-items-center justify-content-between">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Thêm sản phẩm</button>
-    <a href="{{ route('trash.Category') }}" class="btn btn-danger ">Xem thùng rác <i class="fa-solid fa-trash"></i></a>
+    <a href="{{ route('trash.Product') }}" class="btn btn-danger ">Xem thùng rác <i class="fa-solid fa-trash"></i></a>
 </div>
 
 @if (session('alerts'))
@@ -36,7 +36,7 @@
         @foreach ($allProducts as $item)
             <tr>
                 <td>{{ $item->name }}</td>
-                <td><img style="" width="80px" src="/client/images/productsImage/{{ $item->image }}" alt=""></td>
+                <td><img style="" width="80px" src="/storage/images/products/{{ $item->image }}" alt=""></td>
                 <td>{!!$item->description !!}</td>
                 <td>{{ $item->views }}</td>
                 <td>{{ $item->stock }}</td>
@@ -54,7 +54,7 @@
 
                         <form class="mx-2" action="{{ route('delete.Product') }}" method="post">
                             @csrf
-                            <input type="hidden" value="{{ $item->id_product  }}" name="idCategory">
+                            <input type="hidden" value="{{ $item->id_product  }}" name="idProduct">
                             <button type="submit" class="btn btn-danger text-light">
                                 <i class="fa-solid fa-trash"></i>
                             </button>

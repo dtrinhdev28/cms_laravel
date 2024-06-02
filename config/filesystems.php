@@ -46,7 +46,14 @@ return [
 
         'images' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/images'), // Đường dẫn tùy chỉnh
+            'root' => storage_path('app/public/images/products'), // Đường dẫn tùy chỉnh
+            'url' => env('APP_URL').'/storage/images',
+            'visibility' => 'public',
+        ],
+
+        'blog' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/'), // Đường dẫn tùy chỉnh
             'url' => env('APP_URL').'/storage/images',
             'visibility' => 'public',
         ],

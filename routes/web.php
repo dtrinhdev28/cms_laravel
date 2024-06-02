@@ -112,8 +112,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/edit/{id}', [AdminProductController::class, 'edit'])->name('edit.Product');
         Route::post('/delete', [AdminProductController::class, 'deleteAt'])->name('delete.Product');
         Route::get('/trash', [AdminProductController::class, 'trash'])->name('trash.Product');
-        // Route::post('/restore', [AdminProductController::class, 'restore'])->name('restore.Product');
-        // Route::post('/forceDelete', [AdminProductController::class, 'forceDelete'])->name('forceDelete.Product');
+        Route::post('/restore', [AdminProductController::class, 'restore'])->name('restore.Product');
+        Route::post('/forceDelete', [AdminProductController::class, 'forceDelete'])->name('forceDelete.Product');
     });
 });
 
