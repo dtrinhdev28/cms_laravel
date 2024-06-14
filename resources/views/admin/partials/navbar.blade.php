@@ -19,11 +19,6 @@
                         <i class="bi bi-person-lines-fill"></i><span>Manager Users</span>
                       </a>
                   </li>
-                  <li>
-                      <a href="components-modal.html">
-                          <i class="bi bi-circle"></i><span>Modal</span>
-                      </a>
-                  </li>
               </ul>
           </li>
 

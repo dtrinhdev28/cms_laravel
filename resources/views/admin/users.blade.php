@@ -1,5 +1,5 @@
 <div class="py-3 d-flex align-items-center justify-content-between">
-    <a href="{{ route('createUser') }}" class="btn btn-primary">Create user</a>
+    <a href="{{ route('createUser') }}" class="btn btn-primary">Tạo người dùng</a>
     <a href="{{ route('trash.user') }}" class="btn btn-danger ">Xem thùng rác <i class="fa-solid fa-trash"></i></a>
 </div>
 
@@ -15,13 +15,13 @@
     <thead>
         <tr>
             <th>
-                Name
+                Tên
             </th>
             <th>Email</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Roles</th>
-            <th>Active</th>
+            <th>Địa chỉ</th>
+            <th>Số điện thoại</th>
+            <th>Vai trò</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -41,16 +41,18 @@
                 </td>
 
                 <td>
-                    <a href="" class="btn btn-warning text-light">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </a>
-                    <form action="{{ route('delete.user') }}" method="post">
-                        @csrf
-                        <input type="hidden" value="{{ $item->id }}" name="idUser">
-                        <button type="submit" class="btn btn-danger text-light">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </form>
+                    <div class="d-flex">
+                        <a href="{{ route('edit.user', $item->id) }}" class="btn btn-warning text-light">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <form class="mx-2" action="{{ route('delete.user') }}" method="post">
+                            @csrf
+                            <input type="hidden" value="{{ $item->id }}" name="idUser">
+                            <button type="submit" class="btn btn-danger text-light">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
                 </td>
             </tr>
         @endforeach

@@ -68,7 +68,9 @@ class PageController extends Controller
 
         $keyword = (isset($_GET['keyword'])) ? $_GET['keyword'] : '';
 
-        $getAllProduct = ProductsModel::where('name', 'like', '%' . $keyword . '%')->inRandomOrder()->paginate(12);
+        $getAllProduct = ProductsModel::where('name', 'like', '%' . $keyword . '%')
+        ->orWhere('description', 'like', '%' . $keyword . '%')
+        ->paginate(12);
         $getAllCategory = CategoryModel::get();
 
         $viewers = [''];
@@ -79,7 +81,7 @@ class PageController extends Controller
                 ->leftJoin('users', 'users.id', '=', 'viewer.id_user')
                 ->where('users.id', '=', Auth::user()->id)
                 ->where('products.hidden', '=', 1)
-                ->get();
+                ->paginate(4);
         }
         $config = ['title' => (isset($_GET['keyword']) && $_GET['keyword'] !== '') ? 'Tìm kiếm sản phẩm ' . $_GET['keyword'] : 'Shop'];
         $template = 'client.shop';
@@ -136,7 +138,7 @@ class PageController extends Controller
 
     public function checkout()
     {
-        $config = ['title' => 'Trang chủ'];
+        $config = ['title' => 'Thanh toán'];
         $template = 'client.checkout';
 
         $id_user = Auth::user()->id;
@@ -151,6 +153,17 @@ class PageController extends Controller
             'config',
             'template',
             'getcheckoutbyuser'
+        )
+        );
+    }
+
+    public function thank() {
+        $config = ['title' => 'Cảm ơn'];
+        $template = 'client.thankyou';
+
+        return view('client.layouts.master', compact(
+            'config',
+            'template',
         )
         );
     }

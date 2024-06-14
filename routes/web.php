@@ -37,6 +37,7 @@ Route::get('/shop', [PageController::class, 'shop'])->name('shop');
 Route::get('/blogs', [PageController::class, 'blogs'])->name('blogs');
 Route::get('/cart', [PageController::class, 'cart'])->name('cart');
 Route::get('/checkout', [PageController::class, 'checkout'])->name('checkout')->middleware('auth');
+Route::get('/thank', [PageController::class, 'thank'])->name('thank')->middleware('auth');
 
 Route::get('/blog/{id}', [PageController::class, 'blogDetail'])->name('blog');
 // Blog Routes
@@ -77,8 +78,9 @@ Route::middleware('auth')->group(function () {
 });
 
 // Admin Routes
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::prefix('admin')->middleware(CheckAdminMiddleware::class)->group(function () {
     // Dashboard
+    Route::get('/', [AdminDashboardController::class, 'dashboard'])->name('dashboard.admin');
     Route::get('/dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard.admin');
 
     // User Routes
@@ -86,6 +88,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::get('/', [AdminUserController::class, 'index'])->name('getAllUsers');
         Route::get('/create', [AdminUserController::class, 'create'])->name('createUser');
         Route::post('/create', [AdminUserController::class, 'store'])->name('userStore');
+        Route::get('/edit/{id}', [AdminUserController::class, 'edit'])->name('edit.user');
+        Route::post('/update', [AdminUserController::class, 'UpdateUser'])->name('userupdate');
         Route::post('/delete', [AdminUserController::class, 'deleteAt'])->name('delete.user');
         Route::get('/trash', [AdminUserController::class, 'trash'])->name('trash.user');
         Route::post('/restore', [AdminUserController::class, 'restoreUser'])->name('restore.user');
@@ -108,7 +112,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::prefix('product')->group(function () {
         Route::get('/', [AdminProductController::class, 'index'])->name('getAllProduct');
         Route::get('/create', [AdminProductController::class, 'create'])->name('create.Product');
-        Route::post('/create', [AdminProductController::class, 'store'])->name('Store.Product');
+        Route::post('/create', [AdminProductController::class, 'createProduct'])->name('create.Product');
+        Route::post('/update', [AdminProductController::class, 'store'])->name('Store.Product');
         Route::get('/edit/{id}', [AdminProductController::class, 'edit'])->name('edit.Product');
         Route::post('/delete', [AdminProductController::class, 'deleteAt'])->name('delete.Product');
         Route::get('/trash', [AdminProductController::class, 'trash'])->name('trash.Product');
@@ -118,7 +123,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 // Test Email Route
-Route::get('test-email', [SendemailController::class, 'index']);
+// Route::get('test-email', [SendemailController::class, 'index']);
 
 
 // test api giao hàng

@@ -23,7 +23,7 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|max:50',
-            'email' => 'required|max:50|unique:users,email',
+            'email' => 'required|max:50|unique:users,email,'.$this->id.'|email',
             'password' => 'min:8|max:50|required',
         ];
     }
@@ -33,9 +33,9 @@ class UserRequest extends FormRequest
         return [
             'name.required' => 'Name field is required',
             'name.max' => 'Name is maxlength 50',
-           
-            // 'email.required' => 'Email field is required',
-            // 'email.unique' => 'Email is already exist',
+
+            'email.required' => 'Email field is required',
+            'email.unique' => 'Email is already exist',
 
             'password.required' => 'Password field is required',
             'password.min' => 'Password minlength 8 ',

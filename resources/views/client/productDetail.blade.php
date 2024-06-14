@@ -19,7 +19,7 @@
                 <div class="border rounded-4 mb-3 d-flex justify-content-center">
                     <span data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image">
                         <img style="max-width: 100%; height:500px ;max-height: 100vh; margin: auto;"
-                            class="rounded-4 fit" src="/client/images/productsImage/{{ $productBySlug->image }}" />
+                            class="rounded-4 fit" src="/storage/images/products/{{ $productBySlug->image }}" />
                     </span>
                 </div>
                 <div class="d-flex justify-content-center mb-3">
@@ -29,7 +29,7 @@
                             <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="" data-type="image"
                                 href="" class="item-thumb">
                                 <img width="60" height="60" class="rounded-2"
-                                    src="/client/images/productsImage/{{ $item }}" />
+                                    src="/storage/images/products/{{ $item }}" />
                             </a>
                         @endforeach
                     @endif
@@ -78,7 +78,7 @@
 
                     <p>
                         <strong>Mô tả sản phẩm:</strong>
-                        {{ $productBySlug->description }}
+                        {!! $productBySlug->description !!}
                     </p>
 
                     <div class="row">
@@ -189,7 +189,7 @@
                 @foreach ($productsType as $item)
                     <div class="swiper-slide col-12 col-md-2 col-md-3 col-lg-3 mb-5">
                         <a class="product-item" href="/detail/{{ $item->slug }}">
-                            <img src="/client/images/productsImage/{{ $item->image }}"
+                            <img src="/storage/images/products/{{ $item->image }}"
                                 onerror="this.src='/error/404.gif'" class="img-fluid product-thumbnail">
                             <h3 class="product-title">{{ $item->name }}</h3>
                             @if ($item->price_promotion === null || $item->price_promotion === 0)

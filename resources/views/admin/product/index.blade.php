@@ -1,9 +1,3 @@
-<div class="py-3 d-flex align-items-center justify-content-between">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Thêm sản phẩm</button>
-    <a href="{{ route('trash.Product') }}" class="btn btn-danger ">Xem thùng rác <i class="fa-solid fa-trash"></i></a>
-</div>
-
 @if (session('alerts'))
     @foreach (session('alerts') as $type => $message)
         <div class="alert alert-{{ $type }}">
@@ -11,6 +5,14 @@
         </div>
     @endforeach
 @endif
+
+<div class="py-3 d-flex align-items-center justify-content-between">
+    <!-- Button trigger modal -->
+    <a href="{{ route('create.Product') }}" class="btn btn-primary ">Thêm sản phẩm</a>
+    <a href="{{ route('trash.Product') }}" class="btn btn-danger ">Xem thùng rác <i class="fa-solid fa-trash"></i></a>
+</div>
+
+
 
 <div class="table-responsive">
 <table class="table datatable">

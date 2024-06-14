@@ -31,5 +31,4 @@ class ProductsModel extends Model
         'id_images',
         'image',
     ];
-
 }

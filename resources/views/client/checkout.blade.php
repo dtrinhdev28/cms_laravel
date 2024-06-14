@@ -15,10 +15,10 @@
   </div>
   <!-- End Hero Section -->
 
-  <div class="untree_co-section">
+  <div class="mt-5">
       <div class="container">
           <div class="row">
-              <div class="col-md-6 mb-5 mb-md-0">
+              <div class="col-md-6 mb-md-0">
                   <h2 class="h3 mb-3 text-black">Hóa đơn chi tiết</h2>
                   <div class="p-3 p-lg-5 border bg-white">
                       <div class="form-group row">
@@ -30,11 +30,26 @@
                       </div>
 
                       <div class="form-group row">
-                          <div class="col-md-12">
-                              <label for="c_address" class="text-black">Address <span
+                          <div class="col-md-4">
+                              <label for="province" class="text-black">Tỉnh/Thành phố <span
                                       class="text-danger">*</span></label>
-                              <input type="text" class="form-control" id="c_address" name="c_address"
-                                  placeholder="Street address">
+                              <select name="province" class="form-control" id="province">
+                                  <option value="">Chọn tỉnh</option>
+                              </select>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="district" class="text-black">Huyện/ Quận <span
+                                      class="text-danger">*</span></label>
+                              <select name="district" class="form-control" id="district">
+                                  <option value="">Chọn Huyện/ Quận</option>
+                              </select>
+                          </div>
+                          <div class="col-md-4">
+                              <label for="ward" class="text-black">Phường/ Xã <span
+                                      class="text-danger">*</span></label>
+                              <select name="ward" class="form-control" id="ward">
+                                  <option value="">Chọn Phường/ Xã</option>
+                              </select>
                           </div>
                       </div>
 
@@ -60,10 +75,6 @@
                   </div>
               </div>
               <div class="col-md-6">
-
-                  <div class="row mb-5">
-                  </div>
-
                   <div class="row mb-5">
                       <div class="col-md-12">
                           <h2 class="h3 mb-3 text-black">Đơn hàng của bạn</h2>
@@ -113,20 +124,6 @@
                                   <h3 class="h6 mb-0"><a class="d-block" data-bs-toggle="collapse"
                                           href="#collapsecheque" role="button" aria-expanded="false"
                                           aria-controls="collapsecheque">Tiền mặt</a></h3>
-
-                                  <div class="collapse" id="collapsecheque">
-                                      <div class="py-2">
-                                          <p class="mb-0">Thực hiện thanh toán trực tiếp vào tài khoản ngân hàng của
-                                              chúng tôi. Vui lòng
-                                              sử dụng ID đơn hàng của bạn làm tài liệu tham khảo thanh toán. Đơn đặt
-                                              hàng của bạn sẽ không được vận chuyển
-                                              cho đến khi tiền đã vào tài khoản của chúng tôi. Hãy thanh toán trực tiếp
-                                              vào tài khoản ngân hàng của chúng tôi. Vui lòng
-                                              sử dụng ID đơn hàng của bạn làm tài liệu tham khảo thanh toán. Đơn đặt
-                                              hàng của bạn sẽ không được vận chuyển
-                                              cho đến khi tiền đã được xóa trong tài khoản của chúng tôi.</p>
-                                      </div>
-                                  </div>
                               </div>
 
                               <div class="form-group">
@@ -147,8 +144,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script>
       jQuery(document).ready(function() {
-          let address = jQuery('#c_address').on('change', function() {
-              let value_address = jQuery(this).val();
+        // tính tiền ship
+          let address = jQuery('#ward').on('change', function() {
+              let district_id = jQuery('#district').val();
+              let to_ward_code = jQuery('#ward').val();
 
               let price_total = @php echo $total @endphp;
 
@@ -161,10 +160,11 @@
                   type: "post",
                   url: `https://cms.laravel.dangtrinh/calculate-shipping-fee`,
                   data: {
-                      to_district_id: value_address
+                      to_district_id: district_id,
+                      to_ward_code: to_ward_code
                   },
                   success: function(response) {
-                      if (response) {
+                      if (response.data !== null) {
                           let shipping = response.data;
 
                           let ship = shipping.total.toLocaleString('vi-VN', {
@@ -181,10 +181,92 @@
                               }));
 
                           jQuery('#total_ship').html(ship);
+                      } else {
+                        alert("Có lỗi xảy ra vui lòng thử lại sau!!")
+                        window.location.reload()
                       }
                   }
               });
+          })
 
+
+          // lấy tỉnh
+          jQuery.ajaxSetup({
+              headers: {
+                  'token': 'ed187595-1fec-11ef-a9c4-9e9a72686e07'
+              }
+          });
+
+          let proviceHTML = '';
+          jQuery.ajax({
+              type: "POST",
+              url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/province",
+              data: {
+                  token: 'ed187595-1fec-11ef-a9c4-9e9a72686e07'
+              },
+              success: function(response) {
+                  let result = response.data;
+
+                  result.forEach(element => {
+                      proviceHTML +=
+                          `<option value=${element.ProvinceID}>${element.ProvinceName}</option>`;
+                  });
+                  jQuery('#province').html(proviceHTML)
+              }
+          });
+
+          //   lấy huyện
+          jQuery("#province").change(function() {
+              jQuery.ajaxSetup({
+                  headers: {
+                      'token': 'ed187595-1fec-11ef-a9c4-9e9a72686e07'
+                  }
+              });
+              let districtHTML = '';
+              jQuery.ajax({
+                  type: "GET",
+                  url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/district",
+                  data: {
+                      token: 'ed187595-1fec-11ef-a9c4-9e9a72686e07',
+                      province_id: jQuery('#province').val()
+                  },
+                  // dataType: "dataType",
+                  success: function(response) {
+                      let result = response.data;
+                      result.forEach(element => {
+                          districtHTML +=
+                              `<option value=${element.DistrictID}>${element.DistrictName}</option>`;
+                      });
+                      jQuery('#district').html(districtHTML)
+                  }
+              });
+          })
+
+          //   lấy xã phưỡng
+          jQuery("#district").change(function() {
+              jQuery.ajaxSetup({
+                  headers: {
+                      'token': 'ed187595-1fec-11ef-a9c4-9e9a72686e07'
+                  }
+              });
+              let wardHTML = '';
+              jQuery.ajax({
+                  type: "GET",
+                  url: "https://online-gateway.ghn.vn/shiip/public-api/master-data/ward",
+                  data: {
+                    //   token: 'ed187595-1fec-11ef-a9c4-9e9a72686e07',
+                      district_id: jQuery('#district').val()
+                  },
+                  // dataType: "dataType",
+                  success: function(response) {
+                      let result = response.data;
+                      result.forEach(element => {
+                          wardHTML +=
+                              `<option value=${element.WardCode}>${element.WardName}</option>`;
+                      });
+                      jQuery('#ward').html(wardHTML)
+                  }
+              });
           })
       });
   </script>

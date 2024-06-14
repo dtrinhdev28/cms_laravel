@@ -28,7 +28,7 @@
                               <tr>
                                   <td class="product-thumbnail">
                                       <a href="detail/{{ $item->slug }}"> <img
-                                              src="/client/images/productsImage/{{ $item->image }}"
+                                              src="/storage/images/products/{{ $item->image }}"
                                               style="height: 100px" alt="Image" class="img-fluid"></a>
                                   </td>
                                   <td class="product-name">
@@ -121,7 +121,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                   <button class="btn btn-primary btn-lg mt-3 btn-block"
-                                      onclick="window.location='checkout'">Tiến hành thanh toán</button>
+                                    onclick="window.location='checkout'">Tiến hành thanh toán</button>
                               </div>
                           </div>
                       </div>

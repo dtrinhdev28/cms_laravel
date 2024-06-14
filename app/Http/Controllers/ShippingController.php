@@ -18,13 +18,15 @@ class ShippingController extends Controller
 {
     $validatedData = $request->validate([
         'to_district_id' => 'required|integer',
+        'to_ward_code' => 'required',
     ]);
 
     $data = [
         'from_district_id' => 3695,
         'to_district_id' => (int) $validatedData['to_district_id'],
-        // 'service_id' => 53320,
-        'service_type_id' => 2,
+        'to_ward_code' => $validatedData['to_ward_code'],
+        'service_id' => 53321,
+        // 'service_type_id' => 2,
         'weight' => $request->input('weight', 500),
     ];
 
